@@ -1,7 +1,16 @@
 import React, { useState } from "react";
+import { findRxs } from "../../services/restaurants-service";
 
 const SearchRestaurant = () => {
-  const [rxSearchCriteria, setRxSearchCriteria] = useState({});
+  const [rxSearchCriteria, setRxSearchCriteria] = useState({
+    term: null,
+    location: null,
+    price: 1,
+  });
+  const getRxs = async () => {
+    const rxs = await findRxs(rxSearchCriteria);
+    console.log(rxs);
+  };
   return (
     <form className="d-flex justify-content-center">
       <div className="form-group">
@@ -47,7 +56,7 @@ const SearchRestaurant = () => {
           onChange={(e) => {
             setRxSearchCriteria({
               ...rxSearchCriteria,
-              priceRange: e.target.value,
+              price: parseInt(e.target.value),
             });
           }}
           id="price-range-input"
@@ -59,7 +68,11 @@ const SearchRestaurant = () => {
           <option value="4">$$$$</option>
         </select>
       </div>
-      <button type="button" className="btn btn-primary align-self-end">
+      <button
+        onClick={getRxs}
+        type="button"
+        className="btn btn-primary align-self-end"
+      >
         Search
       </button>
     </form>
