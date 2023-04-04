@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { findRxs } from "../../services/restaurants-service";
+import { useNavigate } from "react-router";
 
 const SearchRestaurant = () => {
   const [rxSearchCriteria, setRxSearchCriteria] = useState({
@@ -7,9 +8,10 @@ const SearchRestaurant = () => {
     location: null,
     price: 1,
   });
+  const navigate = useNavigate();
   const getRxs = async () => {
     const rxs = await findRxs(rxSearchCriteria);
-    console.log(rxs);
+    navigate("/search")
   };
   return (
     <form className="d-flex justify-content-center">

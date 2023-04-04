@@ -1,8 +1,8 @@
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import Home from "./chomp/home";
-import SearchRestaurantResults from "./chomp/search-restaurants-results";
+import Home from "./chomp/home-screen";
+import SearchRestaurantResults from "./chomp/search-results-screen";
 
 function App() {
   return (
