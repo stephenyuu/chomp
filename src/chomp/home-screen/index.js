@@ -1,13 +1,13 @@
 import React from "react";
-import SearchRestaurant from "../search-restaurants";
+import SearchRxs from "../search-rxs";
 
-const Home = () => {
+const HomeScreen = () => {
   return (
     <div className="d-flex flex-column align-items-center">
-        <SearchRestaurant />
+        <SearchRxs />
         <button type="button" className="btn btn-secondary mt-3">Login</button>
     </div>
   );
 };
 
-export default Home;
+export default HomeScreen;

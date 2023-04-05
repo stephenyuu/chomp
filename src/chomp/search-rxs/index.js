@@ -1,16 +1,21 @@
 import React, { useState } from "react";
-import { findRxs } from "../../services/restaurants-service";
+import { useDispatch } from "react-redux";
+import { findRxsThunk } from "../../services/rxs/rxs-thunk";
 import { useNavigate } from "react-router";
 
-const SearchRestaurant = () => {
+const SearchRxs = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [rxSearchCriteria, setRxSearchCriteria] = useState({
     term: null,
     location: null,
     price: 1,
   });
-  const navigate = useNavigate();
+  const [buttonDisabled, setButtonDisabled] = useState(false);
   const getRxs = async () => {
-    const rxs = await findRxs(rxSearchCriteria);
+    setButtonDisabled(true);
+    dispatch(findRxsThunk(rxSearchCriteria));
+    setButtonDisabled(false);
     navigate("/search")
   };
   return (
@@ -71,6 +76,7 @@ const SearchRestaurant = () => {
         </select>
       </div>
       <button
+        disabled={buttonDisabled}
         onClick={getRxs}
         type="button"
         className="btn btn-primary align-self-end"
@@ -81,4 +87,4 @@ const SearchRestaurant = () => {
   );
 };
 
-export default SearchRestaurant;
+export default SearchRxs;
