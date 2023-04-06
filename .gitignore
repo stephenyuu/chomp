@@ -3,6 +3,7 @@
 # ignore these
 .idea
 node_modules
+.env
 
 # dependencies
 /node_modules

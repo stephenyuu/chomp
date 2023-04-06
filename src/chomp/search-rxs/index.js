@@ -1,23 +1,27 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { findRxsThunk } from "../../services/rxs/rxs-thunk";
 import { useNavigate } from "react-router";
 
 const SearchRxs = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [rxSearchCriteria, setRxSearchCriteria] = useState({
-    term: null,
-    location: null,
-    price: 1,
-  });
+  const [searchTerms, setSearchTerms] = useState({});
   const [buttonDisabled, setButtonDisabled] = useState(false);
-  const getRxs = async () => {
+  const [priceDropdown, setPriceDropdown] = useState("");
+  const getRxs = () => {
     setButtonDisabled(true);
-    dispatch(findRxsThunk(rxSearchCriteria));
+    let search = "";
+    if (searchTerms.term) {
+      search += `term=${encodeURIComponent(searchTerms.term)}&`;
+    }
+    if (searchTerms.location) {
+      search += `location=${encodeURIComponent(searchTerms.location)}&`;
+    }
+    if (searchTerms.price) {
+      search += `price=${encodeURIComponent(searchTerms.price)}`;
+    }
     setButtonDisabled(false);
-    navigate("/search")
+    navigate(`/search?${search}`);
   };
+
   return (
     <form className="d-flex justify-content-center">
       <div className="form-group">
@@ -26,10 +30,7 @@ const SearchRxs = () => {
         </label>
         <input
           onChange={(e) => {
-            setRxSearchCriteria({
-              ...rxSearchCriteria,
-              term: e.target.value,
-            });
+            setSearchTerms({ ...searchTerms, term: e.target.value });
           }}
           id="search-term-input"
           type="text"
@@ -43,10 +44,7 @@ const SearchRxs = () => {
         </label>
         <input
           onChange={(e) => {
-            setRxSearchCriteria({
-              ...rxSearchCriteria,
-              location: e.target.value,
-            });
+            setSearchTerms({ ...searchTerms, location: e.target.value });
           }}
           id="location-input"
           type="text"
@@ -57,18 +55,20 @@ const SearchRxs = () => {
       </div>
       <div className="form-group">
         <label htmlFor="price-range-input" className="form-label">
-          Price Range
+          Price
         </label>
         <select
           onChange={(e) => {
-            setRxSearchCriteria({
-              ...rxSearchCriteria,
-              price: parseInt(e.target.value),
-            });
+            setPriceDropdown(e.target.value);
+            setSearchTerms({ ...searchTerms, price: e.target.value });
           }}
+          value={priceDropdown}
           id="price-range-input"
           className="form-select"
         >
+          <option value="" disabled hidden>
+            select price
+          </option>
           <option value="1">$</option>
           <option value="2">$$</option>
           <option value="3">$$$</option>
