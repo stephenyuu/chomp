@@ -14,7 +14,7 @@ const HomeScreen = () => {
         <button 
           onClick={navigateLogin}
           type="button"
-          className="btn btn-primary align-center">
+          className="btn btn-primary">
           Login
         </button>
     </div>
