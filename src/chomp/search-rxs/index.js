@@ -4,14 +4,13 @@ import { useNavigate } from "react-router";
 const SearchRxs = () => {
   const navigate = useNavigate();
   const [searchTerms, setSearchTerms] = useState({});
-  const [buttonDisabled, setButtonDisabled] = useState(false);
   const [priceDropdown, setPriceDropdown] = useState("");
+  const validSubmit = () => {
+    return searchTerms.location && searchTerms.location.length !== 0;
+  }
   const submitSearch = () => {
-    setButtonDisabled(true);
     navigate("/search?" + new URLSearchParams(searchTerms));
-    setButtonDisabled(false);
   };
-
   return (
     <form className="d-flex justify-content-center">
       <div className="form-group">
@@ -39,7 +38,7 @@ const SearchRxs = () => {
           id="location-input"
           type="text"
           placeholder="address, neighborhood, city, state, zip code"
-          required
+          required={true}
           className="form-control"
         />
       </div>
@@ -66,7 +65,7 @@ const SearchRxs = () => {
         </select>
       </div>
       <button
-        disabled={buttonDisabled}
+        disabled={!validSubmit()}
         onClick={submitSearch}
         type="button"
         className="btn btn-primary align-self-end"

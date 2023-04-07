@@ -33,7 +33,6 @@ const SearchResultsScreen = () => {
       <SearchRxs />
       <div className="mt-3 d-flex justify-content-around align-items-center">
         <button className="btn btn-primary">Previous</button>
-        {console.log(currentRx)}
         {Object.keys(currentRx).length !== 0 ? <RxCard rx={currentRx} /> : <ClipLoader/>}
         <button className="btn btn-primary">Next</button>
       </div>
