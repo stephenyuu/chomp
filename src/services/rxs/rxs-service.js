@@ -1,14 +1,10 @@
 import axios from "axios";
+
 const RX_REST_API_URL = "http://localhost:4000/api/restaurants";
 
-export const findRxs = async (rxSearchCriteria) => {
-  const { term, location, price } = rxSearchCriteria;
+export const findRxs = async (searchParamsObject) => {
   const response = await axios.get(`${RX_REST_API_URL}`, {
-    params: {
-      term,
-      location,
-      price,
-    },
+    params: searchParamsObject,
   });
   return response.data;
 };

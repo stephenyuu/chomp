@@ -11,7 +11,7 @@ function App() {
       <div className="container">
         <Routes>
           <Route index element={<HomeScreen />} />
-          <Route path="/search" element={<SearchResultsScreen />} />
+          <Route path="/search?" element={<SearchResultsScreen />} />
         </Routes>
       </div>
     </BrowserRouter>

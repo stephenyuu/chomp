@@ -6,20 +6,10 @@ const SearchRxs = () => {
   const [searchTerms, setSearchTerms] = useState({});
   const [buttonDisabled, setButtonDisabled] = useState(false);
   const [priceDropdown, setPriceDropdown] = useState("");
-  const getRxs = () => {
+  const submitSearch = () => {
     setButtonDisabled(true);
-    let search = "";
-    if (searchTerms.term) {
-      search += `term=${encodeURIComponent(searchTerms.term)}&`;
-    }
-    if (searchTerms.location) {
-      search += `location=${encodeURIComponent(searchTerms.location)}&`;
-    }
-    if (searchTerms.price) {
-      search += `price=${encodeURIComponent(searchTerms.price)}`;
-    }
+    navigate("/search?" + new URLSearchParams(searchTerms));
     setButtonDisabled(false);
-    navigate(`/search?${search}`);
   };
 
   return (
@@ -77,7 +67,7 @@ const SearchRxs = () => {
       </div>
       <button
         disabled={buttonDisabled}
-        onClick={getRxs}
+        onClick={submitSearch}
         type="button"
         className="btn btn-primary align-self-end"
       >
