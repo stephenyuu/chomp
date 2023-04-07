@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import { useSearchParams } from "react-router-dom";
 
 const SearchRxs = () => {
   const navigate = useNavigate();
@@ -38,7 +39,6 @@ const SearchRxs = () => {
           id="location-input"
           type="text"
           placeholder="address, neighborhood, city, state, zip code"
-          required={true}
           className="form-control"
         />
       </div>

@@ -13,7 +13,6 @@ const SearchResultsScreen = () => {
   const [results, setResults] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [currentRx, setCurrentRx] = useState({});
-  const [loading, setLoading] = useState()
   const getRxs = async () => {
     const response = await findRxs(searchParamsObject);
     setResults(response);
