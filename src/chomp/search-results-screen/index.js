@@ -1,11 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import SearchRxs from "../search-rxs";
-import { useEffect, useState } from "react";
-import { findRxs } from "../../services/rxs/rxs-service";
-import "./index.css";
-import RxCard from "./rx-card";
 import { ClipLoader } from "react-spinners";
+import { findRxs } from "../../services/rxs/rxs-service";
+import SearchResultsCarousel from "./search-result-carousel";
+import SearchRxs from "../search-rxs";
+import "./index.css";
 
 const SearchResultsScreen = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -18,9 +17,8 @@ const SearchResultsScreen = () => {
     setResults(response);
   };
   useEffect(() => {
-    if (searchParams) {
-      getRxs();
-    }
+    setCurrentRx({});
+    getRxs();
   }, [searchParams]);
   useEffect(() => {
     if (results.length > 0) {
@@ -30,10 +28,9 @@ const SearchResultsScreen = () => {
   return (
     <>
       <SearchRxs />
-      <div className="mt-3 d-flex justify-content-around align-items-center">
-        <button className="btn btn-primary">Previous</button>
-        {Object.keys(currentRx).length !== 0 ? <RxCard rx={currentRx} /> : <ClipLoader/>}
-        <button className="btn btn-primary">Next</button>
+      <h1 className="mt-3 mb-0 fw-bold">Restaurants</h1>
+      <div className="mt-3 d-flex justify-content-center align-items-center">
+        {Object.keys(currentRx).length !== 0 ? <SearchResultsCarousel rxs={results}/> : <ClipLoader/>}
       </div>
     </>
   );

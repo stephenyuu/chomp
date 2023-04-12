@@ -1,6 +1,6 @@
 import React from "react";
-import SearchRxs from "../search-rxs";
 import { useNavigate } from "react-router";
+import SearchRxs from "../search-rxs";
 
 const HomeScreen = () => {
   const navigate = useNavigate();
@@ -9,15 +9,15 @@ const HomeScreen = () => {
   };
 
   return (
-    <div className="d-flex flex-column align-items-center">
+    <>
         <SearchRxs />
         <button 
           onClick={navigateLogin}
           type="button"
-          className="btn btn-primary">
+          className="btn btn-primary mt-3">
           Login
         </button>
-    </div>
+    </>
   );
 };
 

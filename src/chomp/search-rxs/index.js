@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import "./index.css";
 
 const SearchRxs = () => {
   const navigate = useNavigate();
@@ -12,9 +13,9 @@ const SearchRxs = () => {
     navigate("/search?" + new URLSearchParams(searchTerms));
   };
   return (
-    <form className="d-flex justify-content-center">
-      <div className="form-group">
-        <label htmlFor="search-term-input" className="form-label">
+    <form className="d-flex justify-content-center mt-3">
+      <div className="form-group wd-input-flex">
+        <label htmlFor="search-term-input" className="form-label fw-bold">
           Find
         </label>
         <input
@@ -27,8 +28,8 @@ const SearchRxs = () => {
           className="form-control"
         />
       </div>
-      <div className="form-group">
-        <label htmlFor="location-input" className="form-label">
+      <div className="form-group ms-3 wd-input-flex">
+        <label htmlFor="location-input" className="form-label fw-bold">
           Location
         </label>
         <input
@@ -41,8 +42,8 @@ const SearchRxs = () => {
           className="form-control"
         />
       </div>
-      <div className="form-group">
-        <label htmlFor="price-range-input" className="form-label">
+      <div className="form-group ms-3">
+        <label htmlFor="price-range-input" className="form-label fw-bold">
           Price
         </label>
         <select
@@ -67,7 +68,7 @@ const SearchRxs = () => {
         disabled={!validSubmit()}
         onClick={submitSearch}
         type="button"
-        className="btn btn-primary align-self-end"
+        className="btn btn-primary align-self-end ms-3"
       >
         Search
       </button>

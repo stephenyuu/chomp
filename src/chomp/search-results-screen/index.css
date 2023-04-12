@@ -1,3 +1,10 @@
+/* for search-restaurant-carousel */
+.swiper-button-prev, .swiper-button-next {
+    color: #e95420;
+}
+
+/* for rx-card */
+
 .wd-rx-card-img {
     width: 600px;
 }
