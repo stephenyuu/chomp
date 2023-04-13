@@ -4,6 +4,7 @@ import HomeScreen from "./chomp/home-screen";
 import LoginScreen from "./chomp/login-screen";
 import SearchResultsScreen from "./chomp/search-results-screen";
 import "./App.css";
+import ResultDetailsScreen from "./chomp/result-details-screen";
 
 function App() {
   return (
@@ -11,8 +12,9 @@ function App() {
       <div className="container">
         <Routes>
           <Route index element={<HomeScreen />} />
-          <Route path="/search?" element={<SearchResultsScreen />} />
           <Route path="/login" element={<LoginScreen />} />
+          <Route path="/search?" element={<SearchResultsScreen />} />
+          <Route path="/search/:rxid" element={<ResultDetailsScreen />} />
         </Routes>
       </div>
     </BrowserRouter>

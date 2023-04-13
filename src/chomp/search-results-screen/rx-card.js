@@ -1,8 +1,13 @@
 import React from "react";
 import RxStarRatings from "./rx-rating-stars";
 import RxCuisines from "./rx-cuisines";
+import { useNavigate } from "react-router";
 
 const RxCard = ({ rx }) => {
+  const navigate = useNavigate();
+  const seeMoreDetails = () => {
+    navigate(`/search/${rx.id}`);
+  }
   return (
     <div className="d-flex flex-column align-items-center">
       <img
@@ -16,7 +21,7 @@ const RxCard = ({ rx }) => {
           <RxStarRatings rating={rx.rating} />
           <div className="mt-1 badge bg-light wd-badge">{rx.price}</div>
         </div>
-        <button className="btn btn-secondary align-self-center wd-see-more">See more</button>
+        <button onClick={seeMoreDetails} className="btn btn-secondary align-self-center wd-see-more">See more</button>
       </div>
     </div>
   );
