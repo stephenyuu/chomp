@@ -1,10 +1,21 @@
 /* for search-restaurant-carousel */
 .swiper-button-prev, .swiper-button-next {
     color: #e95420;
+    font-weight: bold;
 }
 
 /* for rx-card */
 
-.wd-rx-card-img {
-    width: 600px;
+.wd-rx-card-width {
+    width: 50%;
+}
+
+.wd-rx-name {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.wd-badge {
+    font-size: 1em;
+    margin-right: 0.5em;
 }

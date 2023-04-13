@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { ClipLoader } from "react-spinners";
 import { findRxs } from "../../services/rxs/rxs-service";
-import SearchResultsCarousel from "./search-result-carousel";
+import SearchResultsCarousel from "./search-results-carousel";
 import SearchRxs from "../search-rxs";
+import LoadingBar from "./loading-bar";
 import "./index.css";
 
 const SearchResultsScreen = () => {
@@ -29,8 +29,12 @@ const SearchResultsScreen = () => {
     <>
       <SearchRxs />
       <h1 className="mt-3 mb-0 fw-bold">Restaurants</h1>
-      <div className="mt-3 d-flex justify-content-center align-items-center">
-        {Object.keys(currentRx).length !== 0 ? <SearchResultsCarousel rxs={results}/> : <ClipLoader/>}
+      <div className="mt-3">
+        {Object.keys(currentRx).length !== 0 ? (
+          <SearchResultsCarousel rxs={results} />
+        ) : (
+          <LoadingBar />
+        )}
       </div>
     </>
   );

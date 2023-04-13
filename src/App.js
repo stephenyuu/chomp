@@ -1,10 +1,9 @@
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-import "./App.css";
-
 import HomeScreen from "./chomp/home-screen";
 import LoginScreen from "./chomp/login-screen";
 import SearchResultsScreen from "./chomp/search-results-screen";
+import "./App.css";
 
 function App() {
   return (

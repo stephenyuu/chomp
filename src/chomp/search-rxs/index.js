@@ -14,7 +14,7 @@ const SearchRxs = () => {
   };
   return (
     <form className="d-flex justify-content-center mt-3">
-      <div className="form-group wd-input-flex">
+      <div className="form-group wd-input-field">
         <label htmlFor="search-term-input" className="form-label fw-bold">
           Find
         </label>
@@ -28,7 +28,7 @@ const SearchRxs = () => {
           className="form-control"
         />
       </div>
-      <div className="form-group ms-3 wd-input-flex">
+      <div className="form-group ms-3 wd-input-field">
         <label htmlFor="location-input" className="form-label fw-bold">
           Location
         </label>

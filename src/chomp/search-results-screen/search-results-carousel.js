@@ -1,14 +1,13 @@
 import React from "react";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, A11y } from 'swiper';
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, A11y } from "swiper";
 import RxCard from "./rx-card";
-import 'swiper/css';
-import 'swiper/css/navigation';
+import "swiper/css";
+import "swiper/css/navigation";
 
-const SearchResultsCarousel = ({rxs}) => {
+const SearchResultsCarousel = ({ rxs }) => {
   return (
     <Swiper
-      // install Swiper modules
       modules={[Navigation, A11y]}
       spaceBetween={30}
       slidesPerView={1}
