@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
+import SearchRxs from "../search-rxs";
+import { useParams } from "react-router";
 
 const ResultDetailsScreen = () => {
-    return (
-        <h1>Result Detail Screen</h1>
-    );
-}
+  const { rxid } = useParams();
+  const [details, setDetails] = useState([]);
+  return (
+    <>
+      <SearchRxs />
+      {rxid}
+    </>
+  );
+};
 
 export default ResultDetailsScreen;
