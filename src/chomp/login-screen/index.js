@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { loginThunk, registerThunk } from "../../services/users/users-thunk";
 import { Modal } from "react-bootstrap";
+import Chomp from "..";
 
 const LoginScreen = () => {
   const navigate = useNavigate();
@@ -33,21 +34,21 @@ const LoginScreen = () => {
   };
 
   return (
-    <div>
+    <Chomp activeLink="login">
       <h1>Login</h1>
       <div className="form-group">
         <div>
           <div>
             <div>
               <div className="form-group">
-                <label htmlFor="inputEmail" className="form-label mt-4">
-                  Email address
+                <label htmlFor="inputUsername" className="form-label mt-4">
+                  Username
                 </label>
                 <input
                   type="text"
                   className="form-control"
                   id="inputEmail"
-                  placeholder="example@gmail.com"
+                  placeholder="exampleUserName"
                   value={user.username}
                   onChange={(e) =>
                     setUser({ ...user, username: e.target.value })
@@ -74,14 +75,14 @@ const LoginScreen = () => {
           <button
             onClick={onLoginClick}
             type="button"
-            className="btn btn-secondary align-center"
+            className="btn btn-secondary align-center mt-3"
           >
             Login
           </button>
           <button
             onClick={handleShowModal}
             type="button"
-            className="btn btn-secondary align-center"
+            className="btn btn-secondary align-center mt-3 ms-3"
           >
             Create Account
           </button>
@@ -96,7 +97,7 @@ const LoginScreen = () => {
                   <div className="form-group">
                     <label
                       htmlFor="modalInputEmail"
-                      className="form-label mt-4"
+                      className="form-label"
                     >
                       Email address
                     </label>
@@ -125,7 +126,7 @@ const LoginScreen = () => {
                     <input
                       className="form-control"
                       id="modalLastName"
-                      placeholder="John"
+                      placeholder="Doe"
                       onChange={(e) => setUser({ ...user, lastName: e.target.value })}
                     />
                   </div>
@@ -168,7 +169,7 @@ const LoginScreen = () => {
           </Modal>
         </div>
       </div>
-    </div>
+    </Chomp>
   );
 };
 

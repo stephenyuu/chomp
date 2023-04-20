@@ -13,19 +13,19 @@ import CurrentUserContext from "./chomp/redux/current-uesr-context";
 function App() {
   return (
     <BrowserRouter>
-      <div className="container">
       <Provider store={store}>
         <CurrentUserContext>
-        <Routes>
-          <Route index element={<HomeScreen />} />
-          <Route path="/login" element={<LoginScreen />} />
-          <Route path="/search?" element={<SearchResultsScreen />} />
-          <Route path="/search/:rxid" element={<ResultDetailsScreen />} />
-          <Route path="/profile" element={<Profile />} />
-        </Routes>
+          <div className="box">
+            <Routes>
+              <Route index element={<HomeScreen />} />
+              <Route path="/login" element={<LoginScreen />} />
+              <Route path="/search?" element={<SearchResultsScreen />} />
+              <Route path="/search/:rxid" element={<ResultDetailsScreen />} />
+              <Route path="/profile" element={<Profile />} />
+            </Routes>
+          </div>
         </CurrentUserContext>
       </Provider>
-      </div>
     </BrowserRouter>
   );
 }

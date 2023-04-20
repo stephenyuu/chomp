@@ -12,7 +12,15 @@ const initialState = {
 const usersSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    updateUser: (state, action) => {
+        console.log("in update user action.payload")
+        console.log(action.payload)
+        state.currentUser = action.payload;
+        console.log("state current user")
+        console.log(state.currentUser)
+      },
+  },
   extraReducers: {
     [loginThunk.fulfilled]: (state, action) => {
       state.currentUser = action.payload;
@@ -29,4 +37,5 @@ const usersSlice = createSlice({
   },
 });
 
+export const { updateUser } = usersSlice.actions;
 export default usersSlice.reducer;

@@ -5,6 +5,7 @@ import SearchResultsCarousel from "./search-results-carousel";
 import SearchRxs from "../search-rxs";
 import LoadingBar from "./loading-bar";
 import "./index.css";
+import Chomp from "..";
 
 const SearchResultsScreen = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -19,7 +20,7 @@ const SearchResultsScreen = () => {
     getRxs();
   }, [searchParams]);
   return (
-    <>
+    <Chomp activeLink="">
       <SearchRxs />
       <h1 className="mt-3 mb-0 fw-bold">Restaurants</h1>
       <div className="mt-3">
@@ -29,7 +30,7 @@ const SearchResultsScreen = () => {
           <LoadingBar />
         )}
       </div>
-    </>
+    </Chomp>
   );
 };
 
