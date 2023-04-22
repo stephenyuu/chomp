@@ -8,8 +8,6 @@ import { Dispatch } from "react";
 import { Collapse } from "bootstrap";
 
 const NavBar = ({ activeLink }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.users);
   const [showMenu, setShowMenu] = useState(false);
 

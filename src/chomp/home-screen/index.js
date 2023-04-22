@@ -1,8 +1,8 @@
 import React from "react";
 import Chomp from "..";
 import { useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router";
-import "./index.css"; 
+import { useNavigate } from "react-router";
+
 
 const HomeScreen = () => {
 

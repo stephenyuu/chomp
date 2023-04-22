@@ -1,16 +1,16 @@
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
+import { Provider } from "react-redux";
 import HomeScreen from "./chomp/home-screen";
 import LoginScreen from "./chomp/login-screen";
 import SearchResultsScreen from "./chomp/search-results-screen";
-import "./App.css";
 import ResultDetailsScreen from "./chomp/result-details-screen";
 import ProfileSettings from "./chomp/profile-screens";
+import SearchRxScreen from "./chomp/search-rxs/search-rx-screen";
 import UserProfile from "./chomp/profile-screens/user-profile";
 import store from "./chomp/redux/store";
-import { Provider } from "react-redux";
 import CurrentUserContext from "./chomp/redux/current-user-context";
-import SearchRxScreen from "./chomp/search-rxs/search-rx-screen";
+import "./App.css";
 
 function App() {
   return (

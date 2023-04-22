@@ -7,15 +7,26 @@
 /* for rx-card */
 
 .wd-rx-card-width {
-    width: 30%;
+    max-width: 20rem;
+}
+
+.wd-rx-card-text {
+    font-size: 1rem;
+}
+
+.wd-like-icon {
+    position: absolute;
+    font-size: 1.5rem;
+    top: 1rem;
+    right: 1.5rem;
 }
 
 .wd-rx-name {
-    font-size: 2em;
+    font-size: 2.5rem;
     font-weight: bold;
 }
 
 .wd-badge {
-    font-size: 1em;
+    font-size: 1rem;
     margin-right: 0.5em;
 }
