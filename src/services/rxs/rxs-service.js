@@ -8,3 +8,8 @@ export const findRxs = async (searchParamsObject) => {
   });
   return response.data;
 };
+
+export const findRxDetails = async(rxid) => {
+  const response = await axios.get(`${RX_REST_API_URL}/${rxid}`);
+  return response.data;
+}

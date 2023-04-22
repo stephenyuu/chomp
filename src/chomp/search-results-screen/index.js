@@ -8,6 +8,8 @@ import "./index.css";
 
 const SearchResultsScreen = () => {
   const [searchParams, setSearchParams] = useSearchParams();
+  console.log(searchParams);
+  console.log(Object.fromEntries(searchParams.entries()));
   const searchParamsObject = Object.fromEntries(searchParams.entries());
   const [results, setResults] = useState([]);
   const getRxs = async () => {
@@ -15,7 +17,7 @@ const SearchResultsScreen = () => {
     setResults(response);
   };
   useEffect(() => {
-    setResults({});
+    setResults([]);
     getRxs();
   }, [searchParams]);
   return (
