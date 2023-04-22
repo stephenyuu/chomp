@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import "./index.css";
 
-const SearchRxs = () => {
+const SearchRxs = ({}) => {
   const navigate = useNavigate();
   const [searchTerms, setSearchTerms] = useState({});
   const [priceDropdown, setPriceDropdown] = useState("");

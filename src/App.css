@@ -28,6 +28,14 @@
   color: #61dafb;
 }
 
+.box {
+  position:absolute;
+  top:0px;
+  right:0px;
+  bottom:0px;
+  left:0px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

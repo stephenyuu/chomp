@@ -1,41 +1,175 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { loginThunk, registerThunk } from "../../services/users/users-thunk";
+import { Modal } from "react-bootstrap";
+import Chomp from "..";
 
 const LoginScreen = () => {
   const navigate = useNavigate();
-  const onLoginClick = () => {
-    navigate("/home");
+  const dispatch = useDispatch();
+
+  const [showModal, setShowModal] = useState(false);
+
+  const [user, setUser] = useState({
+    username: "",
+    email: "",
+    firstName: "",
+    lastName: "",
+    password: ""
+  });
+
+  const onLoginClick = async () => {
+    await dispatch(loginThunk(user));
+    navigate("/profile");
   };
-  const onRegisterClick = () => {
-    navigate("/home");
+  const onRegisterClick = async () => {
+    await dispatch(registerThunk(user));
+    setShowModal(false);
+    navigate("/profile");
   };
-  const [showRegisterPopup, setRegisterPopup] = useState(false);
-  const handleClose = () => setRegisterPopup(false);
-  const handleShow = () => setRegisterPopup(true);
+
+  const handleShowModal = () => {
+    setShowModal(true);
+  };
 
   return (
-    <div className="d-flex flex-column align-items-center">
-      <div className="card-body">
+    <Chomp activeLink="login">
+      <h1>Login</h1>
+      <div className="form-group">
         <div>
-          <input className="form-control" placeholder="Username"></input>
-          <input className="form-control" placeholder="Password"></input>
+          <div>
+            <div>
+              <div className="form-group">
+                <label htmlFor="inputUsername" className="form-label">
+                  Username
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inputUsername"
+                  placeholder="exampleUserName"
+                  value={user.username}
+                  onChange={(e) =>
+                    setUser({ ...user, username: e.target.value })
+                  }
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="inputPassword" className="form-label mt-4">
+                  Password
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="inputPassword"
+                  placeholder="password!"
+                  value={user.password}
+                  onChange={(e) =>
+                    setUser({ ...user, password: e.target.value })
+                  }
+                />
+              </div>
+            </div>
+          </div>
+          <button
+            onClick={onLoginClick}
+            type="button"
+            className="btn btn-secondary align-center mt-3"
+          >
+            Login
+          </button>
+          <button
+            onClick={handleShowModal}
+            type="button"
+            className="btn btn-secondary align-center mt-3 ms-3"
+          >
+            Create Account
+          </button>
+
+          <Modal show={showModal} onHide={() => setShowModal(false)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Create Account</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              {
+                <div>
+                  <div className="form-group">
+                    <label
+                      htmlFor="modalInputEmail"
+                      className="form-label"
+                    >
+                      Email address
+                    </label>
+                    <input
+                      className="form-control"
+                      id="modalInputEmail"
+                      placeholder="example@gmail.com"
+                      onChange={(e) => setUser({ ...user, email: e.target.value })}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="modalFirstName" className="form-label mt-4">
+                      First name
+                    </label>
+                    <input
+                      className="form-control"
+                      id="modalFirstName"
+                      placeholder="John"
+                      onChange={(e) => setUser({ ...user, firstName: e.target.value })}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="modalLastName" className="form-label mt-4">
+                      Last name
+                    </label>
+                    <input
+                      className="form-control"
+                      id="modalLastName"
+                      placeholder="Doe"
+                      onChange={(e) => setUser({ ...user, lastName: e.target.value })}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label
+                      htmlFor="modalUsername"
+                      className="form-label mt-4"
+                    >
+                      Username
+                    </label>
+                    <input
+                      className="form-control"
+                      id="modalInputPassword"
+                      placeholder="user123"
+                      onChange={(e) => setUser({ ...user, username: e.target.value })}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label
+                      htmlFor="modalUsername"
+                      className="form-label mt-4"
+                    >
+                      Username
+                    </label>
+                    <input
+                      className="form-control"
+                      id="modalInputPassword"
+                      placeholder="password!"
+                      onChange={(e) => setUser({ ...user, password: e.target.value })}
+                    />
+                  </div>
+                </div>
+              }
+            </Modal.Body>
+            <Modal.Footer>
+              <button className="btn btn-secondary" type="button" onClick={onRegisterClick}>
+                Create Account
+              </button>
+            </Modal.Footer>
+          </Modal>
         </div>
-        <button
-          onClick={onLoginClick}
-          type="button"
-          className="btn btn-secondary align-center"
-        >
-          Login
-        </button>
-        <button
-          onClick={onRegisterClick}
-          type="button"
-          className="btn btn-secondary align-center"
-        >
-          Create Account
-        </button>
       </div>
-    </div>
+    </Chomp>
   );
 };
 
