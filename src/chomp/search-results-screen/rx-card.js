@@ -3,6 +3,7 @@ import RxStarRatings from "./rx-rating-stars";
 import RxCuisines from "./rx-cuisines";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
+import { updateUserThunk } from "../../services/users/users-thunk";
 
 const RxCard = ({ rx }) => {
   const { currentUser } = useSelector((state) => state.users);
@@ -13,15 +14,11 @@ const RxCard = ({ rx }) => {
     navigate(`/search/${rx.id}`);
   };
 
-  /* const handleLikeClick = () => {
+  const handleLikeClick = () => {
     
     // determine if the restaurant exists in the likes schema of the user
-    dispatch(
-      updateUserThunk({
-        ...currentUser,
-      })
-    );
-  }; */
+    console.log("handle like click")
+  };
 
   return (
     <div className="d-flex justify-content-center align-items-center">
@@ -31,7 +28,7 @@ const RxCard = ({ rx }) => {
           className="img-fluid border border-5 border-secondary rounded"
         />
         {currentUser && (
-          <div className="wd-like-icon" onClick={() => console.log("test")}>
+          <div className="wd-like-icon" onClick={handleLikeClick}>
             <i class="bi bi-heart "></i>
           </div>
         )}
