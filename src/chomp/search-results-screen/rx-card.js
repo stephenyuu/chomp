@@ -38,10 +38,10 @@ const RxCard = ({ rx }) => {
       </div>
       <div className="ms-2 d-flex justify-content-around wd-rx-card-width">
         <div className="wd-rx-card-text">
-          <div className="wd-rx-name">{rx.name}</div>
+          <div className="wd-rx-name fw-bold">{rx.name}</div>
           <RxCuisines cuisines={rx.categories} />
           <RxStarRatings rating={rx.rating} />
-          <div className="badge bg-light wd-badge">{rx.price}</div>
+          <div className="badge bg-light">{rx.price}</div>
         </div>
         <button
           onClick={seeMoreDetails}
