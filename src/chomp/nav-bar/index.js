@@ -5,14 +5,27 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { findUserByUsernameThunk } from "../../services/users/users-thunk";
 import { Dispatch } from "react";
-import { Collapse } from "bootstrap";
+import { logoutThunk } from "../../services/users/users-thunk";
 
 const NavBar = ({ activeLink }) => {
   const { currentUser } = useSelector((state) => state.users);
   const [showMenu, setShowMenu] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
+  };
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  const logout = async () => {
+    await dispatch(logoutThunk());
+    navigate("/login");
   };
 
   return (
@@ -30,10 +43,16 @@ const NavBar = ({ activeLink }) => {
             aria-controls="navbarColor01"
             aria-expanded="true"
             aria-label="Toggle navigation"
+            onClick={toggleMenu}
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className={`navbar-collapse collapse ${showMenu ? "show" : "collapse"}`} id="navbarColor01">
+          <div
+            className={`navbar-collapse collapse ${
+              showMenu ? "show" : "collapse"
+            }`}
+            id="navbarColor01"
+          >
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
                 <Link
@@ -64,42 +83,55 @@ const NavBar = ({ activeLink }) => {
                   User Search
                 </Link>
               </li>
-              <li className="nav-item dropdown">
-                <Link
-                  className="nav-link dropdown-toggle"
-                  data-bs-toggle="dropdown"
-                  href="#"
-                  role="button"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  Dropdown
-                </Link>
-              </li>
             </ul>
             <div>
-            <ul className="navbar-nav me-auto">
-              <li className="nav-item">
-                {currentUser ? (
-                  <Link
-                    className={`nav-link ${
-                      activeLink === "settings" ? "active" : ""
-                    }`}
-                    to="/userSettings"
-                  >
-                    Settings
-                  </Link>
-                ) : (
-                  <Link
-                    className={`nav-link ${
-                      activeLink === "login" ? "active" : ""
-                    }`}
-                    to="/login"
-                  >
-                    Login
-                  </Link>
-                )}
-              </li>
+              <ul className="navbar-nav me-auto">
+                <li className="nav-item">
+                  {currentUser ? (
+                    <div className="nav-item dropdown">
+                      <a
+                        className="nav-link dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        onClick={toggleDropdown}
+                        role="button"
+                        aria-haspopup="true"
+                      >
+                        {currentUser.username}
+                      </a>
+                      <div
+                        className={`dropdown-menu dropdown-menu-end ${
+                          showDropdown ? "show" : ""
+                        }`}
+                        data-bs-popper="static"
+                      >
+                        {" "}
+                        <Link className="dropdown-item" to="/favorites">
+                          Favorties
+                        </Link>
+                        <Link className="dropdown-item" to="/userSettings">
+                          Settings
+                        </Link>
+                        <div className="dropdown-divider"></div>
+                        <Link
+                          className="dropdown-item"
+                          to="/login"
+                          onClick={() => logout()}
+                        >
+                          Logout
+                        </Link>
+                      </div>
+                    </div>
+                  ) : (
+                    <Link
+                      className={`nav-link ${
+                        activeLink === "login" ? "active" : ""
+                      }`}
+                      to="/login"
+                    >
+                      Login
+                    </Link>
+                  )}
+                </li>
               </ul>
             </div>
           </div>

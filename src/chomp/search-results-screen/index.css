@@ -16,9 +16,17 @@
 
 .wd-like-icon {
     position: absolute;
-    font-size: 1.5rem;
-    top: 1rem;
-    right: 1.5rem;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: rgba(245, 245, 245, 0.8); /* set the background color with an alpha value */
+    border-radius: 50%; 
+    font-size: 16px;
+    color: #e95420;
+    display: inline-flex; /* use inline-flex to allow vertical centering of the heart icon */
+    width: 32px; /* set a fixed width for the circle */
+    height: 32px; /* set a fixed height for the circle */
+    justify-content: center; /* horizontally center the heart icon */
+    align-items: center; /* vertically center the heart icon */
 }
 
 .wd-rx-name {
