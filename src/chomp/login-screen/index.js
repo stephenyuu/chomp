@@ -21,12 +21,12 @@ const LoginScreen = () => {
 
   const onLoginClick = async () => {
     await dispatch(loginThunk(user));
-    navigate("/profile");
+    navigate("/userSettings");
   };
   const onRegisterClick = async () => {
     await dispatch(registerThunk(user));
     setShowModal(false);
-    navigate("/profile");
+    navigate("/userSettings");
   };
 
   const handleShowModal = () => {

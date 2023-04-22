@@ -78,15 +78,16 @@ const NavBar = ({ activeLink }) => {
               </li>
             </ul>
             <div>
-              <div className="nav-item">
+            <ul className="navbar-nav me-auto">
+              <li className="nav-item">
                 {currentUser ? (
                   <Link
                     className={`nav-link ${
-                      activeLink === "profile" ? "active" : ""
+                      activeLink === "settings" ? "active" : ""
                     }`}
-                    to="/profile"
+                    to="/userSettings"
                   >
-                    Profile
+                    Settings
                   </Link>
                 ) : (
                   <Link
@@ -98,7 +99,8 @@ const NavBar = ({ activeLink }) => {
                     Login
                   </Link>
                 )}
-              </div>
+              </li>
+              </ul>
             </div>
           </div>
         </div>

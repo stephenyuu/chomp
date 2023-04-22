@@ -42,11 +42,11 @@ function ProfileSettings() {
       getProfile();
   }, []);
   return (
-    <Chomp activeLink="profile">
+    <Chomp activeLink="settings">
       {currentUser && (
       <>
       <h1>
-        Profile
+        User Settings
       </h1>
           <div className="form-group">
             <div className="form-floating mb-3">
