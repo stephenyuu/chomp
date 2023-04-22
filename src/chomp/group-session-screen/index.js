@@ -16,6 +16,7 @@ const GroupSessionScreen = () => {
     const response = await findRxs(searchParamsObject);
     setResults(response);
   };
+  
   useEffect(() => {
     getRxs();
   }, []);

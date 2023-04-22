@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { Modal } from "react-bootstrap";
 import Chomp from "..";
 import { createSessionThunk, joinSessionThunk } from "../../services/sessions/sessions-thunk";
+import { findRxs } from "../../services/rxs/rxs-service";
 
 const GroupLoginScreen = () => {
   const navigate = useNavigate();
@@ -33,13 +34,19 @@ const GroupLoginScreen = () => {
     navigate(`/group/${response.payload.groupSessionCode}/search?${response.payload.searchURL}`)
   };
 
+
   const createCodeClick = async () => {
     if (validSubmit) {
       setShowModal(false);
       const urlString = "" + new URLSearchParams(searchTerms);
       const updatedSession = { ...session, searchURL: urlString };
+      const response = await findRxs(new URLSearchParams(searchTerms));
+      console.log(response)
+
+      setSession({...updatedSession, listRxs: response});
       await dispatch(createSessionThunk(updatedSession));
-      setSession(updatedSession);
+
+
       navigate(`/group/${updatedSession.groupSessionCode}/search?${updatedSession.searchURL}`);
     } else {
       console.log("input errors");
