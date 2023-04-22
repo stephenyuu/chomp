@@ -9,8 +9,6 @@ import Chomp from "..";
 
 const SearchResultsScreen = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams);
-  console.log(Object.fromEntries(searchParams.entries()));
   const searchParamsObject = Object.fromEntries(searchParams.entries());
   const [results, setResults] = useState([]);
   const getRxs = async () => {
@@ -22,7 +20,7 @@ const SearchResultsScreen = () => {
     getRxs();
   }, [searchParams]);
   return (
-    <Chomp activeLink="">
+    <Chomp activeLink="searchRxs">
       <SearchRxs />
       <h1 className="mt-3 mb-0 fw-bold">Restaurants</h1>
       <div className="mt-3">

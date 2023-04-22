@@ -1,19 +1,31 @@
 import React from "react";
 import Chomp from "..";
-import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import { useState } from "react";
-import { Modal } from "react-bootstrap";
+import { Navigate, useNavigate } from "react-router";
+import "./index.css"; 
 
 const HomeScreen = () => {
 
   const { currentUser } = useSelector((state) => state.users);
+  const navigate = useNavigate();
 
+  const clickSearchRx = async () => {
+    navigate("/searchRxs");
+  };
 
   return (
-    <Chomp class="align-self-center" activeLink="">
-      <h1>Chomp</h1>
-      
+    <Chomp class="" activeLink="">
+      <div className="home-container">
+        <h1 className="home-title">CHOMP</h1>
+        {currentUser ? (<h2>Welcome {currentUser.firstName}!</h2>) : (<h2>Welcome!</h2>)}
+        <button
+          className="home-button"
+          type="button"
+          onClick={clickSearchRx}
+        >
+          Start Chomping
+        </button>
+      </div>
     </Chomp>
   );
 };

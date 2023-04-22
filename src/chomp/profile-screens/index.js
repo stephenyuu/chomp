@@ -9,7 +9,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import Chomp from "..";
 
-function Profile() {
+function ProfileSettings() {
   const { username } = useParams();
   const { currentUser } = useSelector((state) => state.users);
   const [profile, setProfile] = useState({});
@@ -149,4 +149,4 @@ function Profile() {
   );
 }
 
-export default Profile;
+export default ProfileSettings;

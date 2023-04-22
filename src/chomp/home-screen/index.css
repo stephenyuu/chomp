@@ -1,8 +1,26 @@
-.box {
-    background:red;
-    position:absolute;
-    top:0px;
-    right:0px;
-    bottom:0px;
-    left:0px;
-  }
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.home-title {
+  font-size: 4rem;
+}
+
+.home-button {
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  background-color: #e95420;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.home-button:hover {
+  background-color: #ba431a;
+}
