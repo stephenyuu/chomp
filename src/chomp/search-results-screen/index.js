@@ -10,24 +10,29 @@ import Chomp from "..";
 const SearchResultsScreen = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchParamsObject = Object.fromEntries(searchParams.entries());
+  const [loading, setLoading] = useState(false);
   const [results, setResults] = useState([]);
   const getRxs = async () => {
+    setLoading(true);
     const response = await findRxs(searchParamsObject);
     setResults(response);
+    setLoading(false);
   };
   useEffect(() => {
-    setResults([]);
     getRxs();
   }, [searchParams]);
   return (
     <Chomp activeLink="searchRxs">
       <SearchRxs />
-      <h1 className="mt-3 mb-0 fw-bold">Restaurants</h1>
       <div className="mt-3">
-        {Object.keys(results).length !== 0 ? (
-          <SearchResultsCarousel rxs={results} />
-        ) : (
-          <LoadingBar />
+        {loading && <LoadingBar />}
+        {!loading && (
+          <>
+            <h1 className="mb-0 fw-bold">Restaurants</h1>
+            <div className="mt-3">
+              <SearchResultsCarousel rxs={results} />
+            </div>
+          </>
         )}
       </div>
     </Chomp>

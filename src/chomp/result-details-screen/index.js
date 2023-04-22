@@ -10,31 +10,34 @@ import RxStarRatings from "../search-results-screen/rx-rating-stars";
 
 const ResultDetailsScreen = () => {
   const { rxid } = useParams();
+  const [loading, setLoading] = useState(false);
   const [rxDetails, setRxDetails] = useState({});
   const getRxDetails = async () => {
+    setLoading(true);
     const response = await findRxDetails(rxid);
     setRxDetails(response);
+    setLoading(false);
   };
   useEffect(() => {
-    setRxDetails({});
     getRxDetails();
   }, []);
 
   return (
     <Chomp activeLink="searchRxs">
       <SearchRxs />
-      <h1 className="mt-3 mb-0 fw-bold">{rxDetails.name}</h1>
-      <div>
-        <RxCuisines cuisines={rxDetails.categories} />
-        <RxStarRatings rating={rxDetails.rating} />
-      </div>
-      <div className="mt-3">
-        {Object.keys(rxDetails).length !== 0 ? (
-          <ImageCarousel rxPhotos={rxDetails.photos} />
-        ) : (
-          <LoadingBar />
-        )}
-      </div>
+      {loading && <LoadingBar />}
+      {!loading && (
+        <>
+          <h1 className="mt-3 mb-0 fw-bold">{rxDetails.name}</h1>
+          <div>
+            <RxCuisines cuisines={rxDetails.categories} />
+            <RxStarRatings rating={rxDetails.rating} />
+          </div>
+          <div className="mt-3">
+            <ImageCarousel rxPhotos={rxDetails.photos} />
+          </div>
+        </>
+      )}
     </Chomp>
   );
 };
