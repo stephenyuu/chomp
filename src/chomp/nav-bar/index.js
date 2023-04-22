@@ -1,18 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 
 const NavBar = ({ activeLink }) => {
 
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.users);
-
-  const handleLinkClick = (link) => {
-    navigate(link);
-  };
-
-  console.log(currentUser)
 
   return (
     <>
@@ -35,38 +30,35 @@ const NavBar = ({ activeLink }) => {
           <div className="collapse navbar-collapse" id="navbarColor01">
             <ul className="navbar-nav me-auto">
               <li className="nav-item">
-              <a
+              <Link
                   className={`nav-link ${
                     activeLink === "" ? "active" : ""
                   }`}
-                  href="/"
-                  onClick={() => handleLinkClick("home")}
+                  to="/"
                 >
                   Home
                   <span className="visually-hidden">(current)</span>
-                </a>
+                </Link>
               </li>
               <li className="nav-item">
               {currentUser ? (
-                  <a
+                  <Link
                     className={`nav-link ${
                       activeLink === "profile" ? "active" : ""
                     }`}
-                    href="/profile"
-                    onClick={() => handleLinkClick("profile")}
+                    to="/profile"
                   >
                     Profile
-                  </a>
+                  </Link>
                 ) : (
-                  <a
+                  <Link
                     className={`nav-link ${
                       activeLink === "login" ? "active" : ""
                     }`}
-                    href="/login"
-                    onClick={() => handleLinkClick("login")}
+                    to="/login"
                   >
                     Login
-                  </a>)}
+                  </Link>)}
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#">
@@ -74,12 +66,12 @@ const NavBar = ({ activeLink }) => {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">
+                <Link className="nav-link" href="#">
                   About
-                </a>
+                </Link>
               </li>
               <li className="nav-item dropdown">
-                <a
+                <Link
                   className="nav-link dropdown-toggle"
                   data-bs-toggle="dropdown"
                   href="#"
@@ -88,21 +80,14 @@ const NavBar = ({ activeLink }) => {
                   aria-expanded="false"
                 >
                   Dropdown
-                </a>
+                </Link>
                 <div className="dropdown-menu">
-                  <a className="dropdown-item" href="#">
+                  <Link className="dropdown-item" href="#">
                     Action
-                  </a>
-                  <a className="dropdown-item" href="#">
+                  </Link>
+                  <Link className="dropdown-item" href="#">
                     Another action
-                  </a>
-                  <a className="dropdown-item" href="#">
-                    Something else here
-                  </a>
-                  <div className="dropdown-divider"></div>
-                  <a className="dropdown-item" href="#">
-                    Separated link
-                  </a>
+                  </Link>
                 </div>
               </li>
             </ul>

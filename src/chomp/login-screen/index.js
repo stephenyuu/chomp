@@ -41,13 +41,13 @@ const LoginScreen = () => {
           <div>
             <div>
               <div className="form-group">
-                <label htmlFor="inputUsername" className="form-label mt-4">
+                <label htmlFor="inputUsername" className="form-label">
                   Username
                 </label>
                 <input
                   type="text"
                   className="form-control"
-                  id="inputEmail"
+                  id="inputUsername"
                   placeholder="exampleUserName"
                   value={user.username}
                   onChange={(e) =>

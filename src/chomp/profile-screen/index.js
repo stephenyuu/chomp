@@ -7,7 +7,6 @@ import {
   updateUserThunk,
 } from "../../services/users/users-thunk";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUser } from "../redux/user-reducer";
 import Chomp from "..";
 
 function Profile() {
@@ -27,15 +26,11 @@ function Profile() {
   const saveProfile = async () => {
     if (editing) {
       const action = await dispatch(updateUserThunk(profile));
-      setProfile(action.payload);
-      await dispatch(updateUser(action.payload));
+      setProfile(profile);
+      await dispatch(profileThunk());
     }
+    setProfile(profile);
     setEditing(false);
-  };
-
-  const getUserByUsername = async () => {
-    const user = await userService.findUserByUsername(username);
-    setProfile(user);
   };
 
   const logout = async () => {
@@ -44,16 +39,97 @@ function Profile() {
   };
 
   useEffect(() => {
-    if (username) {
-      getUserByUsername();
-    } else {
       getProfile();
-    }
   }, []);
   return (
     <Chomp activeLink="profile">
+      {currentUser && (
+      <>
       <h1>
-        {editing ? (
+        Profile
+      </h1>
+          <div className="form-group">
+            <div className="form-floating mb-3">
+              <input
+                type="firstName"
+                className="form-control"
+                id="firstNameInput"
+                value={profile.firstName}
+                placeholder="John"
+                disabled={editing ? "" : "yes"}
+                onChange={(e) =>
+                    setProfile({ ...profile, firstName: e.target.value })
+                  }
+              />
+              <label htmlFor="firstNameInput">First Name</label>
+            </div>
+
+            <div className="form-floating mb-3">
+              <input
+                type="lastName"
+                className="form-control"
+                id="lasttNameInput"
+                value={profile.lastName}
+                disabled={editing ? "" : "yes"}
+                onChange={(e) =>
+                    setProfile({ ...profile, lastName: e.target.value })
+                  }
+              />
+              <label htmlFor="lastNameInput">Last Name</label>
+            </div>
+
+            <div className="form-floating mb-3">
+              <input
+                type="username"
+                className="form-control"
+                id="usernameInput"
+                value={profile.username}
+                disabled={editing ? "" : "yes"}
+                onChange={(e) =>
+                    setProfile({ ...profile, username: e.target.value })
+                  }
+              />
+              <label htmlFor="usernameInput">Username</label>
+            </div>
+
+            <div className="form-floating mb-3">
+              <input
+                type="email"
+                className="form-control"
+                id="emailInput"
+                value={profile.email}
+                disabled={editing ? "" : "yes"}
+                onChange={(e) =>
+                    setProfile({ ...profile, email: e.target.value })
+                  }
+              />
+              <label htmlFor="emailInput">email</label>
+            </div>
+
+            <div className="form-floating mb-3">
+              <input
+                type="password"
+                className="form-control"
+                id="passwordInput"
+                value={profile.password}
+                disabled={editing ? "" : "yes"}
+                onChange={(e) =>
+                    setProfile({ ...profile, password: e.target.value })
+                  }
+              />
+              <label htmlFor="passwordInput">Password</label>
+            </div>
+
+
+
+          </div>
+      {!editing && (
+        <button onClick={() => logout()} className="btn btn-danger">
+          Logout
+        </button>
+      )}
+      </>)}
+      {editing ? (
           <button
             className="float-end btn btn-primary"
             onClick={() => saveProfile()}
@@ -68,88 +144,7 @@ function Profile() {
             Edit
           </button>
         )}
-        Profile {username}
-      </h1>
-          <div class="form-group">
-            <div class="form-floating mb-3">
-              <input
-                type="firstName"
-                class="form-control"
-                id="firstNameInput"
-                value={profile.firstName}
-                placeholder="John"
-                disabled={editing ? "" : "yes"}
-                onChange={(e) =>
-                    setProfile({ ...profile, firstName: e.target.value })
-                  }
-              />
-              <label for="firstNameInput">First Name</label>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input
-                type="lastName"
-                class="form-control"
-                id="lasttNameInput"
-                value={profile.lastName}
-                disabled={editing ? "" : "yes"}
-                onChange={(e) =>
-                    setProfile({ ...profile, lastName: e.target.value })
-                  }
-              />
-              <label for="lastNameInput">Last Name</label>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input
-                type="username"
-                class="form-control"
-                id="usernameInput"
-                value={profile.username}
-                disabled={editing ? "" : "yes"}
-                onChange={(e) =>
-                    setProfile({ ...profile, username: e.target.value })
-                  }
-              />
-              <label for="usernameInput">Username</label>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input
-                type="email"
-                class="form-control"
-                id="emailInput"
-                value={profile.email}
-                disabled={editing ? "" : "yes"}
-                onChange={(e) =>
-                    setProfile({ ...profile, email: e.target.value })
-                  }
-              />
-              <label for="emailInput">email</label>
-            </div>
-
-            <div class="form-floating mb-3">
-              <input
-                type="password"
-                class="form-control"
-                id="passwordInput"
-                value={profile.password}
-                disabled={editing ? "" : "yes"}
-                onChange={(e) =>
-                    setProfile({ ...profile, password: e.target.value })
-                  }
-              />
-              <label for="passwordInput">Password</label>
-            </div>
-
-
-
-          </div>
-      {currentUser && !editing && (
-        <button onClick={() => logout()} className="btn btn-danger">
-          Logout
-        </button>
-      )}
+      {!currentUser && <h1>error: not logged in </h1>}
     </Chomp>
   );
 }
