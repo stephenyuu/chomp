@@ -17,15 +17,15 @@ const RxCard = ({ rx }) => {
           className="img-fluid border border-5 border-secondary rounded"
         />
         <div className="wd-like-icon">
-          <i class="bi bi-heart text-secondary"></i>
+          <i class="bi bi-heart text-secondary fw-bold"></i>
         </div>
       </div>
       <div className="ms-2 d-flex justify-content-around wd-rx-card-width">
         <div className="wd-rx-card-text">
-          <div className="wd-rx-name">{rx.name}</div>
+          <div className="wd-rx-name fw-bold">{rx.name}</div>
           <RxCuisines cuisines={rx.categories} />
           <RxStarRatings rating={rx.rating} />
-          <div className="badge bg-light wd-badge">{rx.price}</div>
+          <div className="badge bg-light">{rx.price}</div>
         </div>
         <button
           onClick={seeMoreDetails}
