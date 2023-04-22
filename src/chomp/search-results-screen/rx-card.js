@@ -7,21 +7,32 @@ const RxCard = ({ rx }) => {
   const navigate = useNavigate();
   const seeMoreDetails = () => {
     navigate(`/search/${rx.id}`);
-  }
+  };
+
   return (
-    <div className="d-flex flex-column align-items-center">
-      <img
-        className="border border-5 border-secondary rounded wd-rx-card-width"
-        src={rx.image_url}
-      />
-      <div className="mt-2 d-flex justify-content-between wd-rx-card-width">
-        <div>
+    <div className="d-flex justify-content-center align-items-center">
+      <div className="wd-rx-card-width position-relative">
+        <img
+          src={rx.image_url}
+          className="img-fluid border border-5 border-secondary rounded"
+        />
+        <div className="wd-like-icon">
+          <i class="bi bi-heart text-secondary"></i>
+        </div>
+      </div>
+      <div className="ms-2 d-flex justify-content-around wd-rx-card-width">
+        <div className="wd-rx-card-text">
           <div className="wd-rx-name">{rx.name}</div>
           <RxCuisines cuisines={rx.categories} />
           <RxStarRatings rating={rx.rating} />
-          <div className="mt-1 badge bg-light wd-badge">{rx.price}</div>
+          <div className="badge bg-light wd-badge">{rx.price}</div>
         </div>
-        <button onClick={seeMoreDetails} className="btn btn-secondary align-self-center wd-see-more">See more</button>
+        <button
+          onClick={seeMoreDetails}
+          className="btn btn-secondary align-self-center wd-see-more"
+        >
+          See more
+        </button>
       </div>
     </div>
   );

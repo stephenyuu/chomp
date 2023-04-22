@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 const NavBar = ({ activeLink }) => {
 
-  const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.users);
 
   return (
