@@ -10,7 +10,7 @@ import Chomp from "..";
 const SearchResultsScreen = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchParamsObject = Object.fromEntries(searchParams.entries());
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [results, setResults] = useState([]);
   const getRxs = async () => {
     setLoading(true);

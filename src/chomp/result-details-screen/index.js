@@ -10,7 +10,7 @@ import RxStarRatings from "../search-results-screen/rx-rating-stars";
 
 const ResultDetailsScreen = () => {
   const { rxid } = useParams();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [rxDetails, setRxDetails] = useState({});
   const getRxDetails = async () => {
     setLoading(true);
@@ -25,19 +25,21 @@ const ResultDetailsScreen = () => {
   return (
     <Chomp activeLink="searchRxs">
       <SearchRxs />
-      {loading && <LoadingBar />}
-      {!loading && (
-        <>
-          <h1 className="mt-3 mb-0 fw-bold">{rxDetails.name}</h1>
-          <div>
-            <RxCuisines cuisines={rxDetails.categories} />
-            <RxStarRatings rating={rxDetails.rating} />
-          </div>
-          <div className="mt-3">
-            <ImageCarousel rxPhotos={rxDetails.photos} />
-          </div>
-        </>
-      )}
+      <div>
+        {loading && <LoadingBar />}
+        {!loading && (
+          <>
+            <h1 className="mt-3 mb-0 fw-bold">{rxDetails.name}</h1>
+            <div>
+              <RxCuisines cuisines={rxDetails.categories} />
+              <RxStarRatings rating={rxDetails.rating} />
+            </div>
+            <div className="mt-3">
+              <ImageCarousel rxPhotos={rxDetails.photos} />
+            </div>
+          </>
+        )}
+      </div>
     </Chomp>
   );
 };
