@@ -1,16 +1,13 @@
 import React from "react";
 import { useNavigate } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { isRxLiked, likeRx, dislikeRx} from "../../services/rxs/rxs-service";
-import "../../styles/rx-info-styles.css";
 import { useState, useEffect } from "react";
-import { isRxLiked, likeRx } from "../../services/rxs/rxs-service";
 import RxBasicInfo from "../reusable-components/rx-basic-info/";
 
 const RxCard = ({ rx }) => {
   const { currentUser } = useSelector((state) => state.users);
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const seeMoreDetails = () => {
     navigate(`/search/${rx.id}`);

@@ -5,6 +5,7 @@ import {
   profileThunk,
   logoutThunk,
   updateUserThunk,
+  deleteUserThunk
 } from "../../services/users/users-thunk";
 import { useDispatch, useSelector } from "react-redux";
 import Chomp from "..";
@@ -35,6 +36,11 @@ function ProfileSettings() {
 
   const logout = async () => {
     await dispatch(logoutThunk());
+    navigate("/login");
+  };
+
+  const deleteAccount = async () => {
+    await dispatch(deleteUserThunk(profile));
     navigate("/login");
   };
 
@@ -123,11 +129,15 @@ function ProfileSettings() {
 
 
           </div>
-      {!editing && (
+      {!editing ? (
         <button onClick={() => logout()} className="btn btn-danger">
           Logout
         </button>
-      )}
+      ) :
+      <button onClick={deleteAccount} className="btn btn-danger">
+          Delete
+        </button>
+      }
       </>)}
       {editing ? (
           <button
