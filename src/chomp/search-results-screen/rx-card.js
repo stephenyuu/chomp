@@ -4,6 +4,7 @@ import RxCuisines from "./rx-cuisines";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserThunk } from "../../services/users/users-thunk";
+import { isRxLiked, likeRx } from "../../services/rxs/rxs-service";
 
 const RxCard = ({ rx }) => {
   const { currentUser } = useSelector((state) => state.users);
@@ -14,10 +15,13 @@ const RxCard = ({ rx }) => {
     navigate(`/search/${rx.id}`);
   };
 
+
   const handleLikeClick = () => {
-    
-    // determine if the restaurant exists in the likes schema of the user
-    console.log("handle like click")
+    const rxLiked = isRxLiked(rx.id, currentUser._id);
+    console.log(rx.id, currentUser._id)
+    console.log(rxLiked);
+
+    //likeRx({ name: rx.name, rxId: rx.id });
   };
 
   return (
@@ -29,7 +33,7 @@ const RxCard = ({ rx }) => {
         />
         {currentUser && (
           <div className="wd-like-icon" onClick={handleLikeClick}>
-            <i class="bi bi-heart "></i>
+            <i className="bi bi-heart "></i>
           </div>
         )}
       </div>

@@ -22,3 +22,8 @@ export const likeRx = async (rx) => {
   const response = await api.post(`${RX_REST_API_URL}/${rx.rxId}/likes`, rx);
   return response.data;
 };
+
+export const isRxLiked = async (rxId, userId) => {
+  const response = await api.post(`${RX_REST_API_URL}/${rxId}/${userId}`);
+  return response.data;
+};
