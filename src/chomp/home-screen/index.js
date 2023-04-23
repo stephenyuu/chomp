@@ -15,7 +15,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <Chomp class="" activeLink="">
+    <Chomp className="" activeLink="">
       <div className="home-container">
         <h1 className="home-title">CHOMP</h1>
         {currentUser ? (<h2>Welcome {currentUser.firstName}!</h2>) : (<h2>Welcome!</h2>)}

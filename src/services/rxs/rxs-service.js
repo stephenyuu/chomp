@@ -27,3 +27,13 @@ export const isRxLiked = async (rxId, userId) => {
   const response = await api.post(`${RX_REST_API_URL}/${rxId}/${userId}`);
   return response.data;
 };
+
+export const dislikeRx = async (rxId, userId) => {
+  const response = await api.delete(`${RX_REST_API_URL}/dislike/${rxId}/${userId}`);
+  return response.data;
+};
+
+export const findLikedRxs = async (userId) => {
+  const response = await axios.get(`${RX_REST_API_URL}/findLikes/${userId}`);
+  return response.data;
+};

@@ -3,9 +3,9 @@ import RxStarRatings from "./rx-rating-stars";
 import RxCuisines from "./rx-cuisines";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserThunk } from "../../services/users/users-thunk";
-import { isRxLiked, likeRx } from "../../services/rxs/rxs-service";
+import { isRxLiked, likeRx, dislikeRx} from "../../services/rxs/rxs-service";
 import "../../styles/rx-info-styles.css";
+import { useState, useEffect } from "react";
 
 const RxCard = ({ rx }) => {
   const { currentUser } = useSelector((state) => state.users);
@@ -16,15 +16,25 @@ const RxCard = ({ rx }) => {
     navigate(`/search/${rx.id}`);
   };
 
-
+  const [liked, setLiked] = useState(false);
+  
   const handleLikeClick = () => {
-    const rxLiked = isRxLiked(rx.id, currentUser._id);
-    console.log(rx.id, currentUser._id)
-    console.log(rxLiked);
-
-    //likeRx({ name: rx.name, rxId: rx.id });
+    if (liked) {
+      dislikeRx(rx.id, currentUser._id);
+      setLiked(false)
+    } else {
+      likeRx({ name: rx.name, rxId: rx.id });
+      setLiked(true)
+    }
   };
 
+  useEffect(() => {
+    if (currentUser) {
+      isRxLiked(rx.id, currentUser._id).then((result) => {
+        setLiked(result);
+      });
+    }
+  }, [currentUser, rx.id]);
   return (
     <div className="d-flex justify-content-center align-items-center">
       <div className="wd-rx-card-width position-relative">
@@ -34,7 +44,7 @@ const RxCard = ({ rx }) => {
         />
         {currentUser && (
           <div className="wd-like-icon" onClick={handleLikeClick}>
-            <i className="bi bi-heart "></i>
+            {liked ? (<i className="bi bi-heart-fill"></i>) : <i className="bi bi-heart "></i>}
           </div>
         )}
       </div>
