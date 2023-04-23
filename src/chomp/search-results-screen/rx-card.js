@@ -1,11 +1,11 @@
 import React from "react";
-import RxStarRatings from "./rx-rating-stars";
-import RxCuisines from "./rx-cuisines";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { isRxLiked, likeRx, dislikeRx} from "../../services/rxs/rxs-service";
 import "../../styles/rx-info-styles.css";
 import { useState, useEffect } from "react";
+import { isRxLiked, likeRx } from "../../services/rxs/rxs-service";
+import RxBasicInfo from "../reusable-components/rx-basic-info/";
 
 const RxCard = ({ rx }) => {
   const { currentUser } = useSelector((state) => state.users);
@@ -37,7 +37,7 @@ const RxCard = ({ rx }) => {
   }, [currentUser, rx.id]);
   return (
     <div className="d-flex justify-content-center align-items-center">
-      <div className="wd-rx-card-width position-relative">
+      <div className="wd-rx-card-width position-relative me-2">
         <img
           src={rx.image_url}
           className="img-fluid border border-5 border-secondary rounded"
@@ -48,16 +48,11 @@ const RxCard = ({ rx }) => {
           </div>
         )}
       </div>
-      <div className="ms-2 d-flex justify-content-around wd-rx-card-width">
-        <div className="wd-rx-card-text">
-          <div className="wd-rx-name fw-bold">{rx.name}</div>
-          <RxCuisines cuisines={rx.categories} />
-          <RxStarRatings rating={rx.rating} />
-          <div className="badge bg-light">{rx.price}</div>
-        </div>
+      <div className="d-flex justify-content-around wd-rx-card-width">
+        <RxBasicInfo rxDetails={rx} />
         <button
           onClick={seeMoreDetails}
-          className="btn btn-secondary align-self-center wd-see-more"
+          className="btn btn-secondary align-self-center"
         >
           See more
         </button>

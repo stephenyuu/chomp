@@ -4,6 +4,7 @@ import { Navigation, A11y } from "swiper";
 import RxCard from "./rx-card";
 import "swiper/css";
 import "swiper/css/navigation";
+import "./index.css";
 
 const SearchResultsCarousel = ({ rxs }) => {
   return (

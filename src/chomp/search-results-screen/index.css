@@ -5,6 +5,9 @@
 }
 
 /* for rx-card */
+.wd-rx-card-width {
+    width: 30rem;
+}
 
 .wd-like-icon {
     position: absolute;
