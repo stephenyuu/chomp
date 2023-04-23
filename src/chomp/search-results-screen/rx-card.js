@@ -4,6 +4,7 @@ import RxCuisines from "./rx-cuisines";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserThunk } from "../../services/users/users-thunk";
+import "../../styles/rx-info-styles.css";
 
 const RxCard = ({ rx }) => {
   const { currentUser } = useSelector((state) => state.users);
@@ -15,9 +16,8 @@ const RxCard = ({ rx }) => {
   };
 
   const handleLikeClick = () => {
-    
     // determine if the restaurant exists in the likes schema of the user
-    console.log("handle like click")
+    console.log("handle like click");
   };
 
   return (

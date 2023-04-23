@@ -4,7 +4,7 @@ import { A11y, Autoplay, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
-import "./index.css";
+import "../../styles/rx-info-styles.css";
 
 const ImageCarousel = ({ rxPhotos }) => {
   return (
@@ -17,9 +17,11 @@ const ImageCarousel = ({ rxPhotos }) => {
     >
       {rxPhotos.map((photo) => (
         <SwiperSlide>
-          <div className="wd-rx-image">
-            <img src={photo} 
-            className="img-fluid border border-5 border-secondary rounded"/>
+          <div className="wd-rx-card-width">
+            <img
+              src={photo}
+              className="img-fluid border border-5 border-secondary rounded"
+            />
           </div>
         </SwiperSlide>
       ))}
