@@ -5,6 +5,7 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { updateUserThunk } from "../../services/users/users-thunk";
 import { isRxLiked, likeRx } from "../../services/rxs/rxs-service";
+import "../../styles/rx-info-styles.css";
 
 const RxCard = ({ rx }) => {
   const { currentUser } = useSelector((state) => state.users);

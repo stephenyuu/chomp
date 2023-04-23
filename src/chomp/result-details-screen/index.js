@@ -7,6 +7,7 @@ import ImageCarousel from "./image-carousel";
 import LoadingBar from "../search-results-screen/loading-bar";
 import RxCuisines from "../search-results-screen/rx-cuisines";
 import RxStarRatings from "../search-results-screen/rx-rating-stars";
+import "../../styles/rx-info-styles.css";
 
 const ResultDetailsScreen = () => {
   const { rxid } = useParams();
@@ -25,19 +26,23 @@ const ResultDetailsScreen = () => {
   return (
     <Chomp activeLink="searchRxs">
       <SearchRxs />
-      <div>
+      <div className="mt-3">
         {loading && <LoadingBar />}
         {!loading && (
-          <>
-            <h1 className="mt-3 mb-0 fw-bold">{rxDetails.name}</h1>
-            <div>
-              <RxCuisines cuisines={rxDetails.categories} />
-              <RxStarRatings rating={rxDetails.rating} />
+          <div className="d-flex">
+            <div className="wd-rx-card-text">
+              <h1 className="wd-rx-name fw-bold">{rxDetails.name}</h1>
+              <div className="wd-rx-card-text d-flex">
+                <RxCuisines cuisines={rxDetails.categories} />
+                <RxStarRatings rating={rxDetails.rating} />
+                <div className="badge bg-light">{rxDetails.price}</div>
+              </div>
+              <div>
+
+              </div>
             </div>
-            <div className="mt-3">
-              <ImageCarousel rxPhotos={rxDetails.photos} />
-            </div>
-          </>
+            <ImageCarousel rxPhotos={rxDetails.photos} />
+          </div>
         )}
       </div>
     </Chomp>
