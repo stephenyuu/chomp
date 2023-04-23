@@ -3,8 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { findRxs } from "../../services/rxs/rxs-service";
 import SearchResultsCarousel from "./search-results-carousel";
 import SearchRxs from "../search-rxs";
-import LoadingBar from "./loading-bar";
-import "./index.css";
+import LoadingBar from "../reusable-components/loading-bar";
 import Chomp from "..";
 
 const SearchResultsScreen = () => {
