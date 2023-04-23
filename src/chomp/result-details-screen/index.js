@@ -6,6 +6,7 @@ import SearchRxs from "../search-rxs";
 import ImageCarousel from "./image-carousel";
 import LoadingBar from "../reusable-components/loading-bar";
 import RxBasicInfo from "../reusable-components/rx-basic-info/";
+import RxHours from "../reusable-components/rx-hours";
 
 const ResultDetailsScreen = () => {
   const { rxid } = useParams();
@@ -29,10 +30,17 @@ const ResultDetailsScreen = () => {
         {!loading && (
           <div className="d-flex flex-column">
             <RxBasicInfo rxDetails={rxDetails} />
-            <div className="mt-3">
-              <ImageCarousel
-                rxPhotos={rxDetails.photos}
-              />
+            <div className="mt-3 d-flex">
+              <ImageCarousel rxPhotos={rxDetails.photos} />
+              <ul>
+                <li>
+                  {rxDetails.location.display_address[0] +
+                    ", " +
+                    rxDetails.location.display_address[1]}
+                </li>
+                <li>{rxDetails.display_phone}</li>
+                <RxHours hours={rxDetails.hours} />
+              </ul>
             </div>
           </div>
         )}
