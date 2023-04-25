@@ -1,10 +1,22 @@
+<<<<<<< HEAD
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import LoadingBar from "../reusable-components/loading-bar";
+=======
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
+>>>>>>> 921b78e66bb5506a238a74eb9da961f8b8ad7ba5
 import { findLikedRxs } from "../../services/rxs/rxs-service";
 import { useNavigate } from "react-router";
+import LoadingBar from "../reusable-components/loading-bar";
+import Chomp from "..";
 
+<<<<<<< HEAD
 const FavortiesList = () => {
+=======
+const Favorites = () => {
+>>>>>>> 921b78e66bb5506a238a74eb9da961f8b8ad7ba5
   const { currentUser } = useSelector((state) => state.users);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -54,4 +66,8 @@ const FavortiesList = () => {
   );
 };
 
+<<<<<<< HEAD
 export default FavortiesList;
+=======
+export default Favorites;
+>>>>>>> 921b78e66bb5506a238a74eb9da961f8b8ad7ba5

@@ -104,7 +104,7 @@ const NavBar = ({ activeLink }) => {
                       >
                         {" "}
                         <Link className="dropdown-item" to="/favorites">
-                          Favorties
+                          Favorites
                         </Link>
                         <Link className="dropdown-item" to="/userSettings">
                           Settings
