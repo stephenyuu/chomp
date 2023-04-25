@@ -8,7 +8,7 @@ import ResultDetailsScreen from "./chomp/result-details-screen";
 import ProfileSettings from "./chomp/profile-screens";
 import SearchRxScreen from "./chomp/search-rxs/search-rx-screen";
 import UserProfile from "./chomp/profile-screens/user-profile";
-import Favorites from "./chomp/favorites-and-reviews/index";
+import FavoritesScreen from "./chomp/favorites-and-reviews/index";
 import store from "./chomp/redux/store";
 import CurrentUserContext from "./chomp/redux/current-user-context";
 import "./App.css";
@@ -28,7 +28,7 @@ function App() {
               <Route path="/userSettings" element={<ProfileSettings />} />
               <Route path="/userSearch/:username" element={<UserProfile />} />
               <Route path="/userSearch" element={<UserProfile />} />
-              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/favorites" element={<FavoritesScreen />} />
             </Routes>
           </div>
         </CurrentUserContext>
