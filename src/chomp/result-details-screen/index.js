@@ -32,15 +32,30 @@ const ResultDetailsScreen = () => {
             <RxBasicInfo rxDetails={rxDetails} />
             <div className="mt-3 d-flex">
               <ImageCarousel rxPhotos={rxDetails.photos} />
-              <ul>
-                <li>
-                  {rxDetails.location.display_address[0] +
-                    ", " +
-                    rxDetails.location.display_address[1]}
-                </li>
-                <li>{rxDetails.display_phone}</li>
-                <RxHours hours={rxDetails.hours} />
-              </ul>
+              <table className="table table-hover">
+                <tbody>
+                  <tr className="table-default">
+                    <th scope="row">Address</th>
+                    <td>
+                      {rxDetails.location.display_address[0] +
+                        ", " +
+                        rxDetails.location.display_address[1]}
+                    </td>
+                  </tr>
+                  <tr className="table-default">
+                    <th scope="row">Phone Number</th>
+                    <td>{rxDetails.display_phone}</td>
+                  </tr>
+                  <tr className="table-default">
+                    <td colSpan={2}>
+                      <RxHours hours={rxDetails.hours} />
+                    </td>
+                  </tr>
+                  <tr className="table-default">
+                    <th colspan={2} scope="row"><a href={rxDetails.url}>Link to Yelp Page</a></th>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         )}

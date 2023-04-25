@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import LoadingBar from "../reusable-components/loading-bar";
 import { findLikedRxs } from "../../services/rxs/rxs-service";
 import { useNavigate } from "react-router";
 import LoadingBar from "../reusable-components/loading-bar";
 import Chomp from "..";
 
-const Favorties = () => {
+const Favorites = () => {
   const { currentUser } = useSelector((state) => state.users);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -60,4 +59,4 @@ const Favorties = () => {
   );
 };
 
-export default Favorties;
+export default Favorites;
