@@ -3,8 +3,6 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { findUserByUsernameThunk } from "../../services/users/users-thunk";
-import { Dispatch } from "react";
 import { logoutThunk } from "../../services/users/users-thunk";
 
 const NavBar = ({ activeLink }) => {

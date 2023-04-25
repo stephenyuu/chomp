@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-import Chomp from "..";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 import LoadingBar from "../reusable-components/loading-bar";
 import { findLikedRxs } from "../../services/rxs/rxs-service";
 import { useNavigate } from "react-router";
 
-const Favorties = () => {
+const FavortiesList = () => {
   const { currentUser } = useSelector((state) => state.users);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
@@ -31,9 +29,7 @@ const Favorties = () => {
     }
   }, [currentUser]);
   return (
-    <Chomp activeLink="login">
-      {currentUser && (<h1 className="mt-2">@{currentUser.username}'s Favorites</h1>)}
-      <div className="mt-3">
+    <div className="mt-3">
         {loading && <LoadingBar />}
         {!loading && (
           <>
@@ -55,8 +51,7 @@ const Favorties = () => {
           </>
         )}
       </div>
-    </Chomp>
   );
 };
 
-export default Favorties;
+export default FavortiesList;

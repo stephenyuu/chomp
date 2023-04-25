@@ -1,12 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Chomp from "..";
 import { useNavigate, useParams } from "react-router";
-import { Dispatch } from "react";
 import { findUserByUsernameThunk } from "../../services/users/users-thunk";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Navigate } from "react-router";
+import FavortiesList from "../favorites-and-reviews/favorites";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -27,6 +25,7 @@ const UserProfile = () => {
     };
     loadUser();
   }, [dispatch, username]);
+
   return (
     <Chomp className="align-items-center" activeLink="userSearch">
       <form className="d-flex mt-3">
@@ -45,15 +44,15 @@ const UserProfile = () => {
         <div className="container my-5">
           <div className="row justify-content-center">
             <div className="col-md-8">
-              <div className="card">
-                <div className="card-header">
-                  <h4 className="mb-0">{user.username}</h4>
+              <div className="card border-primary">
+                <div className="card-header border-primary">
+                <h4 className="mb-0">{`${user.firstName} ${user.lastName}`}</h4>
                 </div>
                 <div className="card-body">
-                  <h5 className="card-title">{`${user.firstName} ${user.lastName}`}</h5>
-                  <p className="card-text">
-                    <strong>Email:</strong> {user.email}
-                  </p>
+                  <div className="mt-3">
+                  <h5 className="card-title">{`@${user.username}'s Favorites`}</h5>
+                  <FavortiesList/>
+                </div>
                 </div>
               </div>
             </div>
