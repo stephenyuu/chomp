@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import Chomp from "..";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import LoadingBar from "../search-results-screen/loading-bar";
+import LoadingBar from "../reusable-components/loading-bar";
 import { findLikedRxs } from "../../services/rxs/rxs-service";
 import { useNavigate } from "react-router";
+import LoadingBar from "../reusable-components/loading-bar";
+import Chomp from "..";
 
 const Favorties = () => {
   const { currentUser } = useSelector((state) => state.users);
