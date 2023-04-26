@@ -66,7 +66,7 @@ const NavBar = ({ activeLink }) => {
                   className={`nav-link ${
                     activeLink === "searchRxs" ? "active" : ""
                   }`}
-                  to="/searchRxs"
+                  to="/search-rxs"
                 >
                   Restaurant Search
                 </Link>
@@ -76,7 +76,7 @@ const NavBar = ({ activeLink }) => {
                   className={`nav-link ${
                     activeLink === "userSearch" ? "active" : ""
                   }`}
-                  to="/userSearch"
+                  to="/user-search"
                 >
                   User Search
                 </Link>
@@ -107,11 +107,11 @@ const NavBar = ({ activeLink }) => {
                           Favorites
                         </Link>
                         {currentUser.isReviewer && (
-                          <Link className="dropdown-item" to="/myReviews">
+                          <Link className="dropdown-item" to="/my-reviews">
                             My Reviews
                           </Link>
                         )}
-                        <Link className="dropdown-item" to="/userSettings">
+                        <Link className="dropdown-item" to="/user-settings">
                           Settings
                         </Link>
                         <div className="dropdown-divider"></div>

@@ -9,7 +9,7 @@ import ProfileSettings from "./chomp/profile-screens";
 import SearchRxScreen from "./chomp/search-rxs/search-rx-screen";
 import UserProfile from "./chomp/profile-screens/user-profile";
 import FavoritesScreen from "./chomp/favorites-and-reviews/index";
-import MyReviewsScreen from "./chomp/my-reviews";
+import ReviewsScreen from "./chomp/my-reviews/index";
 import store from "./chomp/redux/store";
 import CurrentUserContext from "./chomp/redux/current-user-context";
 import "./App.css";
@@ -23,14 +23,14 @@ function App() {
             <Routes>
               <Route index element={<HomeScreen />} />
               <Route path="/login" element={<LoginScreen />} />
-              <Route path="/searchRxs" element={<SearchRxScreen />} />
+              <Route path="/search-rxs" element={<SearchRxScreen />} />
               <Route path="/search?" element={<SearchResultsScreen />} />
               <Route path="/search/:rxId" element={<ResultDetailsScreen />} />
-              <Route path="/userSettings" element={<ProfileSettings />} />
-              <Route path="/userSearch/:username" element={<UserProfile />} />
-              <Route path="/userSearch" element={<UserProfile />} />
+              <Route path="/user-settings" element={<ProfileSettings />} />
+              <Route path="/user-search/:username" element={<UserProfile />} />
+              <Route path="/user-search" element={<UserProfile />} />
               <Route path="/favorites" element={<FavoritesScreen />} />
-              <Route path="/myReviews" element={<MyReviewsScreen />} />
+              <Route path="/my-reviews" element={<ReviewsScreen />} />
             </Routes>
           </div>
         </CurrentUserContext>
