@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { findLikedRxsOfUser } from "../../services/likes/likes-service";
 import { useNavigate } from "react-router";
 import LoadingBar from "../reusable-components/loading-bar";
+import { Link } from "react-router-dom";
 
 const FavoritesList = ({ user }) => {
   const navigate = useNavigate();
@@ -34,7 +35,19 @@ const FavoritesList = ({ user }) => {
       {!loading && (
         <>
           {results.length === 0 ? (
-            <strong>No favorites yet</strong> 
+            <div className="container d-flex justify-content-center">
+              <div class="card bg-light mb-3 w-50">
+                <div class="card-header">No favorites found</div>
+                <div class="card-body">
+                  <button
+                    class=" btn btn-primary"
+                    onClick={() => navigate("/search-rxs")}
+                  >
+                    Search for restaurants to favorite!
+                  </button>
+                </div>
+              </div>
+            </div>
           ) : (
             <div className="mt-3">
               {results.map((rx) => (

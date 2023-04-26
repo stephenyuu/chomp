@@ -152,15 +152,23 @@ function ProfileSettings() {
       )}
       {!currentUser && (
         <div className="container d-flex justify-content-center">
-        <div className="alert alert-dismissible alert-danger mt-5 w-50">
-          <button type="button" className="btn-close" data-bs-dismiss="alert"></button>
-          <strong>Oh snap!</strong> We apologize, but the account and password combination you entered does not exist in our records.{" "}
-          <Link className="alert-link" to="/login">
-            Please try again with valid login credentials.
-          </Link>
+          <div className="alert alert-dismissible alert-danger mt-5 w-50">
+            <button
+              type="button"
+              className="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+              onClick={() => {
+                navigate("/login");
+              }}
+            ></button>
+            <strong>Oh snap!</strong> We apologize, but the account and password
+            combination you entered does not exist in our records.{" "}
+            <Link className="alert-link" to="/login">
+              Please try again with valid login credentials.
+            </Link>
+          </div>
         </div>
-      </div>
-      
       )}
     </Chomp>
   );

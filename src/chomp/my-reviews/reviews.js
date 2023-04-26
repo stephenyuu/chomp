@@ -30,7 +30,19 @@ const ReviewsList = ({ user }) => {
       {!loading && (
         <>
         {results.length === 0 ? (
-            <strong>No favorites yet</strong> 
+            <div className="container d-flex justify-content-center">
+            <div className="card bg-light mb-3 w-50">
+              <div className="card-header">No reviews found</div>
+              <div className="card-body">
+                <button
+                  className=" btn btn-primary"
+                  onClick={() => navigate("/search-rxs")}
+                >
+                  Search for restaurants to review!
+                </button>
+              </div>
+            </div>
+          </div>
           ) : (
           <div className="mt-3">
             {results.map((review) => (

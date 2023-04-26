@@ -77,13 +77,13 @@ const UserProfile = () => {
         </div>
       )}
       { !user && username && (
-        <>
-        <div class="card text-white bg-secondary mt-3">
-        <div class="card-body">
-          <h4 class="card-title">No Users found</h4>
+        <div className="container d-flex justify-content-center mt-3">
+        <div className="card bg-light mb-3 w-50">
+          <div className="card-body">
+            No users found. Please try again!
+          </div>
         </div>
-        </div>
-        </>)}
+      </div>)}
     </Chomp>
   );
 };
