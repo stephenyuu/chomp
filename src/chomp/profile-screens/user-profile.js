@@ -44,7 +44,7 @@ const UserProfile = () => {
           Search
         </Link>
       </form>
-      {user ? (
+      {user && (
         <div className="container my-5">
           <div className="row justify-content-center">
             <div className="col-md-8">
@@ -75,9 +75,15 @@ const UserProfile = () => {
             </div>
           </div>
         </div>
-      ) : (
-        <div className="d-flex justify-content-center my-5"></div>
       )}
+      { !user && username && (
+        <>
+        <div class="card text-white bg-secondary mt-3">
+        <div class="card-body">
+          <h4 class="card-title">No Users found</h4>
+        </div>
+        </div>
+        </>)}
     </Chomp>
   );
 };
