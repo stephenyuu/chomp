@@ -18,8 +18,8 @@ const FavoritesList = () => {
     setLoading(false);
   };
 
-  const seeMoreDetails = (rxid) => {
-    navigate(`/search/${rxid}`);
+  const seeMoreDetails = (rxId) => {
+    navigate(`/search/${rxId}`);
   };
 
   useEffect(() => {

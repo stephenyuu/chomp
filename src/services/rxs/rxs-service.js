@@ -13,13 +13,13 @@ export const findRxs = async (searchParamsObject) => {
   return response.data;
 };
 
-export const findRxDetails = async(rxid) => {
-  const response = await axios.get(`${RX_REST_API_URL}/${rxid}`);
+export const findRxDetails = async(rxId) => {
+  const response = await axios.get(`${RX_REST_API_URL}/${rxId}`);
   return response.data;
 }
 
 export const likeRx = async (rx) => {
-  const response = await api.post(`${RX_REST_API_URL}/${rx.rxId}/likes`, rx);
+  const response = await api.post(`${RX_REST_API_URL}/likes/${rx.rxId}`, rx);
   return response.data;
 };
 
@@ -28,12 +28,12 @@ export const isRxLiked = async (rxId, userId) => {
   return response.data;
 };
 
-export const dislikeRx = async (rxId, userId) => {
-  const response = await api.delete(`${RX_REST_API_URL}/dislike/${rxId}/${userId}`);
+export const undoLikeRx = async (rxId, userId) => {
+  const response = await api.delete(`${RX_REST_API_URL}/undo-like/${rxId}/${userId}`);
   return response.data;
 };
 
 export const findLikedRxs = async (userId) => {
-  const response = await axios.get(`${RX_REST_API_URL}/findLikes/${userId}`);
+  const response = await axios.get(`${RX_REST_API_URL}/likes-by-user/${userId}`);
   return response.data;
 };

@@ -24,7 +24,7 @@ function App() {
               <Route path="/login" element={<LoginScreen />} />
               <Route path="/searchRxs" element={<SearchRxScreen />} />
               <Route path="/search?" element={<SearchResultsScreen />} />
-              <Route path="/search/:rxid" element={<ResultDetailsScreen />} />
+              <Route path="/search/:rxId" element={<ResultDetailsScreen />} />
               <Route path="/userSettings" element={<ProfileSettings />} />
               <Route path="/userSearch/:username" element={<UserProfile />} />
               <Route path="/userSearch" element={<UserProfile />} />
