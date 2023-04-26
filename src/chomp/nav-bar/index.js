@@ -106,6 +106,11 @@ const NavBar = ({ activeLink }) => {
                         <Link className="dropdown-item" to="/favorites">
                           Favorites
                         </Link>
+                        {currentUser.isReviewer && (
+                          <Link className="dropdown-item" to="/myReviews">
+                            My Reviews
+                          </Link>
+                        )}
                         <Link className="dropdown-item" to="/userSettings">
                           Settings
                         </Link>

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router";
 import { findUserByUsernameThunk } from "../../services/users/users-thunk";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import FavortiesList from "../favorites-and-reviews/favorites";
+import FavoritesList from "../favorites-and-reviews/favorites";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -51,7 +51,7 @@ const UserProfile = () => {
                 <div className="card-body">
                   <div className="mt-3">
                   <h5 className="card-title">{`@${user.username}'s Favorites`}</h5>
-                  <FavortiesList/>
+                  <FavoritesList/>
                 </div>
                 </div>
               </div>

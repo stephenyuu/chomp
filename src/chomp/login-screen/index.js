@@ -16,7 +16,9 @@ const LoginScreen = () => {
     email: "",
     firstName: "",
     lastName: "",
-    password: ""
+    password: "",
+    isReviewer: "false",
+    rxId: ""
   });
 
   const onLoginClick = async () => {
@@ -33,6 +35,12 @@ const LoginScreen = () => {
     setShowModal(true);
   };
 
+  const handleUserTypeChange = (e) => {
+    console.log(e.target.value)
+    const isReviewer = e.target.value === "reviewer";
+    setUser({ ...user, isReviewer });
+  };
+  
   return (
     <Chomp activeLink="login">
       <h1>Login</h1>
@@ -95,17 +103,16 @@ const LoginScreen = () => {
               {
                 <div>
                   <div className="form-group">
-                    <label
-                      htmlFor="modalInputEmail"
-                      className="form-label"
-                    >
+                    <label htmlFor="modalInputEmail" className="form-label">
                       Email address
                     </label>
                     <input
                       className="form-control"
                       id="modalInputEmail"
                       placeholder="example@gmail.com"
-                      onChange={(e) => setUser({ ...user, email: e.target.value })}
+                      onChange={(e) =>
+                        setUser({ ...user, email: e.target.value })
+                      }
                     />
                   </div>
                   <div className="form-group">
@@ -116,7 +123,9 @@ const LoginScreen = () => {
                       className="form-control"
                       id="modalFirstName"
                       placeholder="John"
-                      onChange={(e) => setUser({ ...user, firstName: e.target.value })}
+                      onChange={(e) =>
+                        setUser({ ...user, firstName: e.target.value })
+                      }
                     />
                   </div>
                   <div className="form-group">
@@ -127,42 +136,75 @@ const LoginScreen = () => {
                       className="form-control"
                       id="modalLastName"
                       placeholder="Doe"
-                      onChange={(e) => setUser({ ...user, lastName: e.target.value })}
+                      onChange={(e) =>
+                        setUser({ ...user, lastName: e.target.value })
+                      }
                     />
                   </div>
                   <div className="form-group">
-                    <label
-                      htmlFor="modalUsername"
-                      className="form-label mt-4"
-                    >
+                    <label htmlFor="modalUsername" className="form-label mt-4">
                       Username
                     </label>
                     <input
                       className="form-control"
                       id="modalInputPassword"
                       placeholder="user123"
-                      onChange={(e) => setUser({ ...user, username: e.target.value })}
+                      onChange={(e) =>
+                        setUser({ ...user, username: e.target.value })
+                      }
                     />
                   </div>
                   <div className="form-group">
-                    <label
-                      htmlFor="modalUsername"
-                      className="form-label mt-4"
-                    >
+                    <label htmlFor="modalUsername" className="form-label mt-4">
                       Username
                     </label>
                     <input
                       className="form-control"
                       id="modalInputPassword"
                       placeholder="password!"
-                      onChange={(e) => setUser({ ...user, password: e.target.value })}
+                      onChange={(e) =>
+                        setUser({ ...user, password: e.target.value })
+                      }
                     />
+                    <label className="form-label mt-4">
+                      User Type
+                    </label>
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="userType"
+                        id="reviewerRadio"
+                        value="reviewer"
+                        onChange={handleUserTypeChange}
+                      />
+                      <label className="form-check-label" htmlFor="reviewerRadio">
+                        Reviewer & Chomper
+                      </label>
+                    </div>
+                    <div className="form-check">
+                      <input
+                        className="form-check-input"
+                        type="radio"
+                        name="userType"
+                        id="regualrRadio"
+                        value="regular"
+                        onChange={handleUserTypeChange}
+                      />
+                      <label className="form-check-label" htmlFor="regualrRadio">
+                        Chomper
+                      </label>
+                    </div>
                   </div>
                 </div>
               }
             </Modal.Body>
             <Modal.Footer>
-              <button className="btn btn-secondary" type="button" onClick={onRegisterClick}>
+              <button
+                className="btn btn-secondary"
+                type="button"
+                onClick={onRegisterClick}
+              >
                 Create Account
               </button>
             </Modal.Footer>
