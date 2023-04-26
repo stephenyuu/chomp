@@ -9,7 +9,7 @@ const FavoritesScreen = () => {
   return (
     <Chomp activeLink="login">
       {currentUser && (<h1 className="mt-2">Your Favorites</h1>)}
-      <FavoritesList/>
+      <FavoritesList user={currentUser}/>
     </Chomp>
   );
 };

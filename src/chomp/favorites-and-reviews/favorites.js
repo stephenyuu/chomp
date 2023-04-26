@@ -5,30 +5,29 @@ import { findLikedRxs } from "../../services/rxs/rxs-service";
 import { useNavigate } from "react-router";
 import LoadingBar from "../reusable-components/loading-bar";
 
-const FavoritesList = () => {
-  const { currentUser } = useSelector((state) => state.users);
+const FavoritesList = ({user}) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [results, setResults] = useState([]);
 
   const getLikedRxs = async () => {
     setLoading(true);
-    const response = await findLikedRxs(currentUser._id);
+    const response = await findLikedRxs(user._id);
     setResults(response);
     setLoading(false);
   };
 
-  const seeMoreDetails = (rxId) => {
-    navigate(`/search/${rxId}`);
+  const seeMoreDetails = (rxid) => {
+    navigate(`/search/${rxid}`);
   };
 
   useEffect(() => {
-    if (currentUser) {
+    if (user) {
       getLikedRxs();
     } else {
       console.log("error: must be logged in");
     }
-  }, [currentUser]);
+  }, [user]);
   return (
     <div className="mt-3">
         {loading && <LoadingBar />}

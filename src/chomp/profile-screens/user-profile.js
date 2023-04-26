@@ -6,6 +6,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import FavoritesList from "../favorites-and-reviews/favorites";
 
+
 const UserProfile = () => {
   const dispatch = useDispatch();
   const { username } = useParams();
@@ -15,7 +16,7 @@ const UserProfile = () => {
 
   const searchUsersClick = async () => {
     await dispatch(findUserByUsernameThunk(search.search));
-    navigate(`/userSearch/${search.search}`);
+    navigate(`/user-search/${search.search}`);
   };
 
   useEffect(() => {
@@ -51,7 +52,7 @@ const UserProfile = () => {
                 <div className="card-body">
                   <div className="mt-3">
                   <h5 className="card-title">{`@${user.username}'s Favorites`}</h5>
-                  <FavoritesList/>
+                  <FavoritesList user={user} />
                 </div>
                 </div>
               </div>

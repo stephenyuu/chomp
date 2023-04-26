@@ -5,11 +5,15 @@ import ReviewsList from "./reviews";
 
 const ReviewsScreen = () => {
   const { currentUser } = useSelector((state) => state.users);
-  
+
   return (
     <Chomp activeLink="login">
-      {currentUser && (<h1 className="mt-2">Your Reviews</h1>)}
-      <ReviewsList/>
+      {currentUser && (
+        <>
+           <h1 className="mt-2">Your Reviews</h1>
+          <ReviewsList user={currentUser} />{" "}
+        </>
+      )}
     </Chomp>
   );
 };
