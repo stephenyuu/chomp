@@ -11,7 +11,7 @@ const HomeScreen = () => {
   const navigate = useNavigate();
 
   const clickSearchRx = async () => {
-    navigate("/searchRxs");
+    navigate("/search-rxs");
   };
 
   return (

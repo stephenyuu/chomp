@@ -30,9 +30,9 @@ const NavBar = ({ activeLink }) => {
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <Link to="" className="navbar-brand">
             CHOMP
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
