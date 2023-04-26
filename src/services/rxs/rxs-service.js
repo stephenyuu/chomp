@@ -18,6 +18,11 @@ export const findRxDetails = async(rxId) => {
   return response.data;
 }
 
+export const findRxYelpReviews = async(rxId) => {
+  const response = await axios.get(`${RX_REST_API_URL}/reviews/${rxId}`);
+  return response.data;
+}
+
 export const likeRx = async (rx) => {
   const response = await api.post(`${RX_REST_API_URL}/likes/${rx.rxId}`, rx);
   return response.data;

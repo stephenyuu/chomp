@@ -22,7 +22,6 @@ const ResultDetailsScreen = () => {
   useEffect(() => {
     getRxDetails();
   }, []);
-
   return (
     <Chomp activeLink="searchRxs">
       <SearchRxs />
@@ -33,35 +32,31 @@ const ResultDetailsScreen = () => {
             <RxBasicInfo rxDetails={rxDetails} />
             <div className="mt-3 d-flex">
               <ImageCarousel rxPhotos={rxDetails.photos} />
-              <table className="table table-hover">
-                <tbody>
-                  <tr className="table-default">
-                    <th scope="row">Address</th>
-                    <td>
-                      {rxDetails.location.display_address[0] +
-                        ", " +
-                        rxDetails.location.display_address[1]}
-                    </td>
-                  </tr>
-                  <tr className="table-default">
-                    <th scope="row">Phone Number</th>
-                    <td>{rxDetails.display_phone}</td>
-                  </tr>
-                  <tr className="table-default">
-                    <td colSpan={2}>
-                      <RxHoursAccordion hours={rxDetails.hours} />
-                    </td>
-                  </tr>
-                  <tr className="table-default">
-                    <th colspan={2} scope="row"><a href={rxDetails.url}>Link to Yelp Page</a></th>
-                  </tr>
-                  <tr className="table-default">
-                    <td colSpan={2}>
-                      <RxYelpReviewsAccordion rx={rxDetails.id} />
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <ul className="list-group wd-additional-info-text">
+                <li className="list-group-item">
+                  <span className="fw-bold">Address</span>
+                  <span className="float-end">
+                    {rxDetails.location.display_address[0] +
+                      ", " +
+                      rxDetails.location.display_address[1]}
+                  </span>
+                </li>
+                <li className="list-group-item">
+                  <span className="fw-bold">Phone Number</span>
+                  <span className="float-end">{rxDetails.display_phone}</span>
+                </li>
+                <li className="list-group-item">
+                  <RxHoursAccordion hours={rxDetails.hours} />
+                </li>
+                <li className="list-group-item">
+                  <a className="fw-bold" href={rxDetails.url}>
+                    Link to Yelp Page
+                  </a>
+                </li>
+                <li className="list-group-item">
+                  <RxYelpReviewsAccordion rxId={rxId} />
+                </li>
+              </ul>
             </div>
           </div>
         )}

@@ -1,3 +1,7 @@
 .wd-image-width {
     width: 30rem;
 }
+
+.swiper, .wd-additional-info-text {
+    width: 50%;
+}
