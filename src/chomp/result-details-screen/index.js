@@ -18,21 +18,19 @@ const ResultDetailsScreen = () => {
   const [loading, setLoading] = useState(true);
   const [rxDetails, setRxDetails] = useState({});
   const [rxLikes, setRxLikes] = useState([]);
-  const [liked, setLiked] = useState(false);
   const getRxDetails = async () => {
+    setLoading(true);
     const response = await findRxDetails(rxId);
     setRxDetails(response);
+    setLoading(false);
   };
   const getRxLikes = async () => {
     const response = await findLikesOfRx(rxId);
     setRxLikes(response);
-  };
-  
+  }
+
   useEffect(() => {
-    setLoading(true);
     getRxDetails();
-    getRxLikes();
-    setLoading(false);
   }, []);
 
   return (
