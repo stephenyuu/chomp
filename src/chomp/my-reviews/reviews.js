@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 import LoadingBar from "../reusable-components/loading-bar";
 import { findRxReviewsById } from "../../services/reviews/reviews-service";
 
-const ReviewsList = ({user}) => {
+const ReviewsList = ({ user }) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [results, setResults] = useState([]);
@@ -13,39 +13,40 @@ const ReviewsList = ({user}) => {
   const getReviews = async () => {
     setLoading(true);
     const response = await findRxReviewsById(user._id);
-    console.log(response)
     setResults(response);
     setLoading(false);
   };
 
-
   useEffect(() => {
     if (user) {
-        getReviews();
+      getReviews();
     } else {
       console.log("error: must be logged in");
     }
   }, [user]);
   return (
     <div className="mt-3">
-        {loading && <LoadingBar />}
-        {!loading && (
-          <>
-            <div className="mt-3">
-              {results.map((review) => (
-                <ul className="list-group">
+      {loading && <LoadingBar />}
+      {!loading && (
+        <>
+        {results.length === 0 ? (
+            <strong>No favorites yet</strong> 
+          ) : (
+          <div className="mt-3">
+            {results.map((review) => (
+              <ul className="list-group">
                 <li className="list-group-item d-flex justify-content-between align-items-center mb-2">
-                    <div>
-                  <h3>{review.rxName}</h3>
-                  <p>{review.review}</p>
+                  <div>
+                    <h3>{review.rxName}</h3>
+                    <p>{review.review}</p>
                   </div>
                 </li>
-                </ul>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
+              </ul>
+            ))}
+          </div>)}
+        </>
+      )}
+    </div>
   );
 };
 

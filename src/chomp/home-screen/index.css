@@ -24,3 +24,9 @@
 .wd-home-button:hover {
   background-color: #ba431a;
 }
+
+.wd-intro {
+  max-width: 500px; 
+  margin: 0 auto;
+  text-align: center;
+}

@@ -36,7 +36,6 @@ const LoginScreen = () => {
   };
 
   const handleUserTypeChange = (e) => {
-    console.log(e.target.value)
     const isReviewer = e.target.value === "reviewer";
     setUser({ ...user, isReviewer });
   };

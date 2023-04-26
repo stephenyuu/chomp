@@ -8,7 +8,7 @@ import ResultDetailsScreen from "./chomp/result-details-screen";
 import ProfileSettings from "./chomp/profile-screens";
 import SearchRxScreen from "./chomp/search-rxs/search-rx-screen";
 import UserProfile from "./chomp/profile-screens/user-profile";
-import FavoritesScreen from "./chomp/favorites-and-reviews/index";
+import FavoritesScreen from "./chomp/favorites/index";
 import ReviewsScreen from "./chomp/my-reviews/index";
 import store from "./chomp/redux/store";
 import CurrentUserContext from "./chomp/redux/current-user-context";
