@@ -11,21 +11,28 @@ export const likeRx = async (rx) => {
   return response.data;
 };
 
-export const isRxLiked = async (rxId, userId) => {
+export const isRxLikedByUser = async (rxId, userId) => {
   const response = await api.post(`${LIKES_REST_API_URL}/${rxId}/${userId}`);
   return response.data;
 };
 
 export const undoLikeRx = async (rxId, userId) => {
   const response = await api.delete(
-    `${LIKES_REST_API_URL}/undo-like/${rxId}/${userId}`
+    `${LIKES_REST_API_URL}/undo/${rxId}/${userId}`
   );
   return response.data;
 };
 
-export const findLikedRxs = async (userId) => {
+export const findLikedRxsOfUser = async (userId) => {
   const response = await axios.get(
-    `${LIKES_REST_API_URL}/likes-by-user/${userId}`
+    `${LIKES_REST_API_URL}/user/${userId}`
   );
   return response.data;
 };
+
+export const findLikesOfRx = async(rxId) => {
+  const response = await axios.get(
+    `${LIKES_REST_API_URL}/rxs/${rxId}`
+  );
+  return response.data;    
+}

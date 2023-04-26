@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import { isRxLiked, likeRx, undoLikeRx} from "../../services/likes/likes-service";
+import { isRxLikedByUser, likeRx, undoLikeRx} from "../../services/likes/likes-service";
 import { useState, useEffect } from "react";
 import RxBasicInfo from "../reusable-components/rx-basic-info/";
 
@@ -27,7 +27,7 @@ const RxCard = ({ rx }) => {
 
   useEffect(() => {
     if (currentUser) {
-      isRxLiked(rx.id, currentUser._id).then((result) => {
+      isRxLikedByUser(rx.id, currentUser._id).then((result) => {
         setLiked(result);
       });
     }

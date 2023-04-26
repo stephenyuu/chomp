@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { findLikedRxs } from "../../services/likes/likes-service";
+import { findLikedRxsOfUser } from "../../services/likes/likes-service";
 import { useNavigate } from "react-router";
 import LoadingBar from "../reusable-components/loading-bar";
 
@@ -12,7 +12,7 @@ const FavoritesList = ({user}) => {
 
   const getLikedRxs = async () => {
     setLoading(true);
-    const response = await findLikedRxs(user._id);
+    const response = await findLikedRxsOfUser(user._id);
     setResults(response);
     setLoading(false);
   };
