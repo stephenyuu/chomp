@@ -6,15 +6,16 @@ import SearchRxs from "../search-rxs";
 import ImageCarousel from "./image-carousel";
 import LoadingBar from "../reusable-components/loading-bar";
 import RxBasicInfo from "../reusable-components/rx-basic-info/";
-import RxHours from "../reusable-components/rx-hours";
+import RxHoursAccordion from "../reusable-components/rx-hours-accordion";
+import RxYelpReviewsAccordion from "../reusable-components/rx-yelp-reviews-accordion";
 
 const ResultDetailsScreen = () => {
-  const { rxid } = useParams();
+  const { rxId } = useParams();
   const [loading, setLoading] = useState(true);
   const [rxDetails, setRxDetails] = useState({});
   const getRxDetails = async () => {
     setLoading(true);
-    const response = await findRxDetails(rxid);
+    const response = await findRxDetails(rxId);
     setRxDetails(response);
     setLoading(false);
   };
@@ -48,11 +49,16 @@ const ResultDetailsScreen = () => {
                   </tr>
                   <tr className="table-default">
                     <td colSpan={2}>
-                      <RxHours hours={rxDetails.hours} />
+                      <RxHoursAccordion hours={rxDetails.hours} />
                     </td>
                   </tr>
                   <tr className="table-default">
                     <th colspan={2} scope="row"><a href={rxDetails.url}>Link to Yelp Page</a></th>
+                  </tr>
+                  <tr className="table-default">
+                    <td colSpan={2}>
+                      <RxYelpReviewsAccordion rx={rxDetails.id} />
+                    </td>
                   </tr>
                 </tbody>
               </table>

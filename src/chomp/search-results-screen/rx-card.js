@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import { isRxLiked, likeRx, dislikeRx} from "../../services/rxs/rxs-service";
+import { isRxLiked, likeRx, undoLikeRx} from "../../services/rxs/rxs-service";
 import { useState, useEffect } from "react";
 import RxBasicInfo from "../reusable-components/rx-basic-info/";
 
@@ -17,7 +17,7 @@ const RxCard = ({ rx }) => {
   
   const handleLikeClick = () => {
     if (liked) {
-      dislikeRx(rx.id, currentUser._id);
+      undoLikeRx(rx.id, currentUser._id);
       setLiked(false)
     } else {
       likeRx({ name: rx.name, rxId: rx.id });

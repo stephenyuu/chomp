@@ -1,6 +1,6 @@
 import React from "react";
 
-const RxHours = ({ hours }) => {
+const RxHoursAccordion = ({ hours }) => {
   const formatTime = (timeString) => {
     const time = new Date(
       `2000-01-01T${timeString.slice(0, 2)}:${timeString.slice(2, 4)}:00`
@@ -41,10 +41,11 @@ const RxHours = ({ hours }) => {
 
   const yelpHours = hours[0].open;
   const rows = createRows(yelpHours);
+
   return (
-    <div className="accordion" id="accordionExample">
+    <div className="accordion" id="hoursAccordion">
       <div className="accordion-item">
-        <h2 className="accordion-header" id="headingOne">
+        <h2 className="accordion-header" id="hoursHeading">
           <button
             className="accordion-button collapsed"
             type="button"
@@ -59,8 +60,8 @@ const RxHours = ({ hours }) => {
         <div
           id="collapseOne"
           className="accordion-collapse collapse"
-          aria-labelledby="headingOne"
-          data-bs-parent="#accordionExample"
+          aria-labelledby="hoursHeading"
+          data-bs-parent="#hoursAccordion"
         >
           <div className="accordion-body">
             <table className="table table-hover">
@@ -73,4 +74,4 @@ const RxHours = ({ hours }) => {
   );
 };
 
-export default RxHours;
+export default RxHoursAccordion;
