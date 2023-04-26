@@ -4,13 +4,13 @@ import { A11y, Autoplay, Pagination } from "swiper";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/autoplay";
-import "./index.css";
 
 const ImageCarousel = ({ rxPhotos }) => {
   return (
     <Swiper
+      id="image-carousel"
       modules={[Pagination, Autoplay, A11y]}
-      spaceBetween={30}
+      spaceBetween={100}
       slidesPerView={1}
       pagination
       autoplay={{ delay: 3000 }}

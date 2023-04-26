@@ -8,17 +8,22 @@ import LoadingBar from "../reusable-components/loading-bar";
 import RxBasicInfo from "../reusable-components/rx-basic-info/";
 import RxHoursAccordion from "../reusable-components/rx-hours-accordion";
 import RxYelpReviewsAccordion from "../reusable-components/rx-yelp-reviews-accordion";
+import "./index.css";
 
 const ResultDetailsScreen = () => {
   const { rxId } = useParams();
   const [loading, setLoading] = useState(true);
   const [rxDetails, setRxDetails] = useState({});
+  const [likes, setLikes] = useState([]);
   const getRxDetails = async () => {
     setLoading(true);
     const response = await findRxDetails(rxId);
     setRxDetails(response);
     setLoading(false);
   };
+  const getRxLikes = async () => {
+    
+  }
   useEffect(() => {
     getRxDetails();
   }, []);
@@ -29,7 +34,11 @@ const ResultDetailsScreen = () => {
         {loading && <LoadingBar />}
         {!loading && (
           <div className="d-flex flex-column">
-            <RxBasicInfo rxDetails={rxDetails} />
+            <div className="d-flex justify-content-between align-items-center">
+              <RxBasicInfo rxDetails={rxDetails} />
+              <span className="badge bg-light"></span>
+            </div>
+            
             <div className="mt-3 d-flex">
               <ImageCarousel rxPhotos={rxDetails.photos} />
               <ul className="list-group wd-additional-info-text">
