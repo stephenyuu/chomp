@@ -4,11 +4,11 @@ import { Navigation, A11y } from "swiper";
 import RxCard from "./rx-card";
 import "swiper/css";
 import "swiper/css/navigation";
-import "./index.css";
 
 const SearchResultsCarousel = ({ rxs }) => {
   return (
     <Swiper
+      id="search-results-carousel"
       modules={[Navigation, A11y]}
       spaceBetween={30}
       slidesPerView={1}

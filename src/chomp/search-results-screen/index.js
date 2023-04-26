@@ -5,6 +5,7 @@ import SearchResultsCarousel from "./search-results-carousel";
 import SearchRxs from "../search-rxs";
 import LoadingBar from "../reusable-components/loading-bar";
 import Chomp from "..";
+import "./index.css";
 
 const SearchResultsScreen = () => {
   const [searchParams, setSearchParams] = useSearchParams();

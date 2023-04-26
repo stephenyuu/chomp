@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import { findLikedRxs } from "../../services/rxs/rxs-service";
+import { findLikedRxs } from "../../services/likes/likes-service";
 import { useNavigate } from "react-router";
 import LoadingBar from "../reusable-components/loading-bar";
 

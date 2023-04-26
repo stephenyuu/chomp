@@ -30,7 +30,7 @@ const NavBar = ({ activeLink }) => {
     <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-primary">
         <div className="container-fluid">
-          <Link to="" className="navbar-brand">
+          <Link to="/" className="navbar-brand">
             CHOMP
           </Link>
           <button

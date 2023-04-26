@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
-import { isRxLiked, likeRx, undoLikeRx} from "../../services/rxs/rxs-service";
+import { isRxLiked, likeRx, undoLikeRx} from "../../services/likes/likes-service";
 import { useState, useEffect } from "react";
 import RxBasicInfo from "../reusable-components/rx-basic-info/";
 
