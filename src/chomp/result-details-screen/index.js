@@ -23,7 +23,6 @@ import {
   deleteReview,
   findReviewsOfRx,
   reviewRx,
-  updateReview,
 } from "../../services/reviews/reviews-service";
 
 const ResultDetailsScreen = () => {
@@ -39,7 +38,6 @@ const ResultDetailsScreen = () => {
 
   const [rxReviews, setRxReviews] = useState([]);
   const [reviewText, setReviewText] = useState("");
-  const [editReviewText, setEditReviewText] = useState("");
 
   const [showLikesModal, setShowLikesModal] = useState(false);
   const [showReviewsModal, setShowReviewsModal] = useState(false);
@@ -64,21 +62,11 @@ const ResultDetailsScreen = () => {
     }
   };
 
-  const onEditClick = async (editReview) => {
-    console.log("editing");
-  };
-
   const onDeleteClick = async (deletedReview) => {
     await deleteReview(deletedReview._id);
     setRxReviews((rxReviews) =>
       rxReviews.filter((review) => review._id !== deletedReview._id)
     );
-    console.log("delete review");
-  };
-
-  const onSaveClick = async (updatedReview) => {
-    console.log("saving");
-    await updateReview(updatedReview);
   };
 
   const handleLikeClick = async () => {
@@ -228,44 +216,18 @@ const ResultDetailsScreen = () => {
                       <ul className="list-group mt-2">
                         {rxReviews.map((reviewItem) => (
                           <li className="list-group-item">
-                            {review.review}
+                            {reviewItem.review}
                             {" - "}
-                            {review.userMongooseKey === currentUser._id && (
-                              <>
-                                {reviewItem.isEditing ? (
-                                  <>
-                                    <input
-                                      className="form-control mb-1"
-                                      value={reviewItem.review}
-                                      type="text"
-                                    ></input>
-                                    <button
-                                      className="btn btn-danger btn-sm float-end"
-                                      onClick={() => onDeleteClick(reviewItem)}
-                                    >
-                                      Delete
-                                    </button>
-                                    <button
-                                      className="btn btn-primary btn-sm float-end"
-                                      onClick={() => onSaveClick(reviewItem)}
-                                    >
-                                      Save
-                                    </button>
-                                  </>
-                                ) : (
-                                  <>
-                                    {reviewItem.review}
-                                    {" - "}
-                                    <button
-                                      className="btn btn-primary btn-sm float-end"
-                                      onClick={() => onEditClick(reviewItem)}
-                                    >
-                                      Edit
-                                    </button>
-                                  </>
-                                )}
-                              </>
-                            )}
+                            {currentUser &&
+                              reviewItem.userMongooseKey ===
+                                currentUser._id && (
+                                <button
+                                  className="btn btn-danger btn-sm float-end"
+                                  onClick={() => onDeleteClick(reviewItem)}
+                                >
+                                  Delete
+                                </button>
+                              )}
                           </li>
                         ))}
                       </ul>
