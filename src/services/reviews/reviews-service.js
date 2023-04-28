@@ -11,8 +11,8 @@ export const reviewRx = async (rxDetails, reviewText) => {
     return response.data;
   };
 
-export const updateUser = async (reviewId, reviewText) => {
-    const response = await api.put(`${REVIEWS_REST_API_URL}/${reviewId}`, { text: reviewText });
+export const updateReview = async (review) => {
+    const response = await api.put(`${REVIEWS_REST_API_URL}/${review._id}`, review);
     return response.data;
 };
 
