@@ -15,7 +15,7 @@ const HomeScreen = () => {
   return (
     <Chomp className="" activeLink="">
       <div className="wd-home-container">
-        <h1 className="wd-home-title">CHOMP</h1>
+        <h1 className="wd-home-title fw-bold">CHOMP</h1>
         {currentUser ? (
           <h2>Welcome {currentUser.firstName}!</h2>
         ) : (
@@ -33,7 +33,7 @@ const HomeScreen = () => {
           type="button"
           onClick={clickSearchRx}
         >
-          Start Chomping
+          Start Chomping!
         </button>
       </div>
     </Chomp>

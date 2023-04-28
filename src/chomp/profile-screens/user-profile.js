@@ -30,6 +30,7 @@ const UserProfile = () => {
 
   return (
     <Chomp className="align-items-center" activeLink="userSearch">
+      <h3 className="fw-bold mt-3">Find Fellow Chompers and Nibblers</h3>
       <form className="d-flex flex-column mt-3">
         <label htmlFor="search-username-input" className="form-label fw-bold">
           Search by username

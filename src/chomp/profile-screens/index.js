@@ -51,7 +51,7 @@ function ProfileSettings() {
     <Chomp activeLink="settings">
       {currentUser && (
         <>
-          <h1>User Settings</h1>
+          <h3 className="fw-bold mt-3">User Settings</h3>
           <div className="form-group">
             <div className="form-floating mb-3">
               <input

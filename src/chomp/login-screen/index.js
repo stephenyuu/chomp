@@ -42,7 +42,7 @@ const LoginScreen = () => {
   
   return (
     <Chomp activeLink="login">
-      <h1>Login</h1>
+      <h3 className="fw-bold mt-3">Login</h3>
       <div className="form-group">
         <div>
           <div>

@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import LoadingBar from "../reusable-components/loading-bar";
@@ -15,6 +14,10 @@ const ReviewsList = ({ user }) => {
     const response = await findReviewedRxsOfUser(user._id);
     setResults(response);
     setLoading(false);
+  };
+
+  const seeMoreDetails = (rxid) => {
+    navigate(`/search/${rxid}`);
   };
 
   useEffect(() => {
@@ -40,7 +43,7 @@ const ReviewsList = ({ user }) => {
             {results.map((review) => (
               <ul className="list-group">
                 <li className="list-group-item d-flex justify-content-between align-items-center mb-2">
-                  <div>
+                  <div className="wd-nav-text" onClick={() => seeMoreDetails(review.rxId)}>
                     <h3>{review.rxName}</h3>
                     <p>{review.review}</p>
                   </div>

@@ -8,12 +8,8 @@ const ReviewsScreen = () => {
 
   return (
     <Chomp activeLink="login">
-      {currentUser && (
-        <>
-           <h1 className="mt-2">Your Reviews</h1>
-          <ReviewsList user={currentUser} />{" "}
-        </>
-      )}
+      <h3 className="mt-3 fw-bold">My Reviews</h3>
+      {currentUser && <ReviewsList user={currentUser} />}
     </Chomp>
   );
 };
