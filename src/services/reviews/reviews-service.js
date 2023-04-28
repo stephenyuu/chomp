@@ -11,7 +11,12 @@ export const deleteReview = async (rxId, userId) => {
   return response.data;
 };
 
-export const findRxReviewsById = async (userId) => {
-  const response = await axios.get(`${REVIEWS_REST_API_URL}/${userId}`);
+export const findReviewsOfRx = async (rxId) => {
+  const response = await axios.get(`${REVIEWS_REST_API_URL}/rxs/${rxId}`);
+  return response.data;
+}
+
+export const findReviewedRxsOfUser = async (userId) => {
+  const response = await axios.get(`${REVIEWS_REST_API_URL}/user/${userId}`);
   return response.data;
 };

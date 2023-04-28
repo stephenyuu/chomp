@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router";
 import LoadingBar from "../reusable-components/loading-bar";
-import { findRxReviewsById } from "../../services/reviews/reviews-service";
+import { findReviewedRxsOfUser } from "../../services/reviews/reviews-service";
 
 const ReviewsList = ({ user }) => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ const ReviewsList = ({ user }) => {
 
   const getReviews = async () => {
     setLoading(true);
-    const response = await findRxReviewsById(user._id);
+    const response = await findReviewedRxsOfUser(user._id);
     setResults(response);
     setLoading(false);
   };

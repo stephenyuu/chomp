@@ -19,6 +19,7 @@ import RxBasicInfo from "../reusable-components/rx-basic-info/";
 import RxHoursAccordion from "../reusable-components/rx-hours-accordion";
 import RxYelpReviewsAccordion from "../reusable-components/rx-yelp-reviews-accordion";
 import "./index.css";
+import { findReviewsOfRx } from "../../services/reviews/reviews-service";
 
 const ResultDetailsScreen = () => {
   const navigate = useNavigate();
@@ -27,9 +28,12 @@ const ResultDetailsScreen = () => {
   const [loading, setLoading] = useState(true);
   const [rxDetails, setRxDetails] = useState({});
   const [rxLikes, setRxLikes] = useState([]);
+  const [rxReviews, setRxReviews] = useState([]);
   const [liked, setLiked] = useState(false);
   const [rxLikesUsernames, setRxLikesUsernames] = useState([]);
   const [showLikesModal, setShowLikesModal] = useState(false);
+  const [showReviewsModal, setShowReviewsModal] = useState(false);
+  const [reviewText, setReviewText] = useState("");
   const getRxDetails = async () => {
     const response = await findRxDetails(rxId);
     setRxDetails(response);
@@ -37,6 +41,10 @@ const ResultDetailsScreen = () => {
   const getRxLikes = async () => {
     const response = await findLikesOfRx(rxId);
     setRxLikes(response);
+  };
+  const getRxReviews = async () => {
+    const response = await findReviewsOfRx(rxId);
+    setRxReviews(response);
   };
   const getIfLiked = async () => {
     if (currentUser) {
@@ -47,21 +55,25 @@ const ResultDetailsScreen = () => {
   };
 
   const handleLikeClick = async () => {
-      if (liked) {
-        await undoLikeRx(rxId, currentUser._id);
-        setRxLikes((likes) =>
-          likes.filter((like) => like.userMongooseKey !== currentUser._id)
-        );
-        setLiked(false);
-      } else {
-        const response = await likeRx({ name: rxDetails.name, rxId: rxId });
-        setRxLikes((likes) => [...likes, response]);
-        setLiked(true);
-      }
+    if (liked) {
+      await undoLikeRx(rxId, currentUser._id);
+      setRxLikes((likes) =>
+        likes.filter((like) => like.userMongooseKey !== currentUser._id)
+      );
+      setLiked(false);
+    } else {
+      const response = await likeRx({ name: rxDetails.name, rxId: rxId });
+      setRxLikes((likes) => [...likes, response]);
+      setLiked(true);
+    }
   };
 
   const handleUsernameClick = (username) => {
     navigate(`/user-search/${username}`);
+  };
+
+  const handleShareReviewClick = () => {
+
   };
 
   useEffect(() => {
@@ -69,6 +81,7 @@ const ResultDetailsScreen = () => {
       setLoading(true);
       await getRxDetails();
       await getRxLikes();
+      await getRxReviews();
       await getIfLiked();
       setLoading(false);
     };
@@ -98,46 +111,96 @@ const ResultDetailsScreen = () => {
           <div className="d-flex flex-column">
             <div className="d-flex justify-content-between align-items-center">
               <RxBasicInfo rxDetails={rxDetails} />
-              <div className="badge bg-light">
-                {currentUser && (
-                  <span onClick={handleLikeClick}>
-                    {liked ? (
-                      <i className="bi bi-heart-fill"></i>
-                    ) : (
-                      <i className="bi bi-heart "></i>
-                    )}{" "}
+              <div>
+                <div className="badge bg-light">
+                  {currentUser && (
+                    <span onClick={handleLikeClick}>
+                      {liked ? (
+                        <i className="bi bi-heart-fill"></i>
+                      ) : (
+                        <i className="bi bi-heart "></i>
+                      )}{" "}
+                    </span>
+                  )}
+                  <span
+                    onClick={() => {
+                      setShowLikesModal(true);
+                    }}
+                    className="wd-nav-text"
+                  >
+                    {`${rxLikes.length} Likes`}
                   </span>
-                )}
-                <span
-                  onClick={() => {
-                    setShowLikesModal(true);
-                  }}
-                  className="wd-nav-text"
-                >
-                  {`${rxLikes.length} likes`}
-                </span>
-                <Modal
-                  show={showLikesModal}
-                  onHide={() => setShowLikesModal(false)}
-                >
-                  <Modal.Header closeButton>
-                    <Modal.Title>Likes</Modal.Title>
-                  </Modal.Header>
-                  <Modal.Body>
-                    {
-                      <ul className="list-group">
-                        {rxLikesUsernames.map((username) => (
-                          <li
-                            className="list-group-item wd-nav-text"
-                            onClick={() => handleUsernameClick(username)}
-                          >
-                            {username}
+                  <Modal
+                    show={showLikesModal}
+                    onHide={() => setShowLikesModal(false)}
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title>Likes</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      {
+                        <ul className="list-group">
+                          {rxLikesUsernames.map((username) => (
+                            <li
+                              className="list-group-item wd-nav-text"
+                              onClick={() => handleUsernameClick(username)}
+                            >
+                              {username}
+                            </li>
+                          ))}
+                        </ul>
+                      }
+                    </Modal.Body>
+                  </Modal>
+                </div>
+                <div className="badge bg-light">
+                  <span>
+                    <i class="bi bi-chat"></i>{" "}
+                  </span>
+                  <span
+                    onClick={() => {
+                      setShowReviewsModal(true);
+                    }}
+                    className="wd-nav-text"
+                  >
+                    {`${rxLikes.length} Nibbler Reviews`}
+                  </span>
+                  <Modal
+                    show={showReviewsModal}
+                    onHide={() => setShowReviewsModal(false)}
+                  >
+                    <Modal.Header closeButton>
+                      <Modal.Title>Nibbler Reviews</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                      {currentUser.isReviewer && (
+                        <div class="form-group">
+                          <label for="reviewTextarea" class="form-label">
+                            Write a review
+                          </label>
+                          <textarea
+                            class="form-control"
+                            id="reviewTextarea"
+                            rows="5"
+                            value={reviewText}
+                           
+                          ></textarea>
+                          <button className="btn btn-primary mt-2" onClick={handleShareReviewClick}>
+                            Share
+                          </button>
+                        </div>
+                      )}
+                      <ul className="list-group mt-2">
+                        {rxReviews.map((review) => (
+                          <li className="list-group-item">
+                            {review.review}
+                            {" - "}
                           </li>
                         ))}
                       </ul>
-                    }
-                  </Modal.Body>
-                </Modal>
+                    </Modal.Body>
+                  </Modal>
+                </div>
               </div>
             </div>
             <div className="mt-3 d-flex">
