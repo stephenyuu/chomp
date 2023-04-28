@@ -55,7 +55,7 @@ const LoginScreen = () => {
                   type="text"
                   className="form-control"
                   id="inputUsername"
-                  placeholder="exampleUserName"
+                  placeholder="Enter your username"
                   value={user.username}
                   onChange={(e) =>
                     setUser({ ...user, username: e.target.value })
@@ -70,7 +70,7 @@ const LoginScreen = () => {
                   type="text"
                   className="form-control"
                   id="inputPassword"
-                  placeholder="password!"
+                  placeholder="Enter your password"
                   value={user.password}
                   onChange={(e) =>
                     setUser({ ...user, password: e.target.value })
@@ -108,7 +108,7 @@ const LoginScreen = () => {
                     <input
                       className="form-control"
                       id="modalInputEmail"
-                      placeholder="example@gmail.com"
+                      placeholder="Enter your email"
                       onChange={(e) =>
                         setUser({ ...user, email: e.target.value })
                       }
@@ -121,7 +121,7 @@ const LoginScreen = () => {
                     <input
                       className="form-control"
                       id="modalFirstName"
-                      placeholder="John"
+                      placeholder="Enter your first name"
                       onChange={(e) =>
                         setUser({ ...user, firstName: e.target.value })
                       }
@@ -134,7 +134,7 @@ const LoginScreen = () => {
                     <input
                       className="form-control"
                       id="modalLastName"
-                      placeholder="Doe"
+                      placeholder="Enter your last name"
                       onChange={(e) =>
                         setUser({ ...user, lastName: e.target.value })
                       }
@@ -146,21 +146,21 @@ const LoginScreen = () => {
                     </label>
                     <input
                       className="form-control"
-                      id="modalInputPassword"
-                      placeholder="user123"
+                      id="modalUsername"
+                      placeholder="Enter your username"
                       onChange={(e) =>
                         setUser({ ...user, username: e.target.value })
                       }
                     />
                   </div>
                   <div className="form-group">
-                    <label htmlFor="modalUsername" className="form-label mt-4">
+                    <label htmlFor="modalInputPassword" className="form-label mt-4">
                       Username
                     </label>
                     <input
                       className="form-control"
                       id="modalInputPassword"
-                      placeholder="password!"
+                      placeholder="Enter your password"
                       onChange={(e) =>
                         setUser({ ...user, password: e.target.value })
                       }
@@ -178,7 +178,7 @@ const LoginScreen = () => {
                         onChange={handleUserTypeChange}
                       />
                       <label className="form-check-label" htmlFor="reviewerRadio">
-                        Reviewer & Chomper
+                        Nibbler
                       </label>
                     </div>
                     <div className="form-check">

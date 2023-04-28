@@ -18,19 +18,24 @@ const ResultDetailsScreen = () => {
   const [loading, setLoading] = useState(true);
   const [rxDetails, setRxDetails] = useState({});
   const [rxLikes, setRxLikes] = useState([]);
+  const [liked, setLiked] = useState(false);
   const getRxDetails = async () => {
-    setLoading(true);
     const response = await findRxDetails(rxId);
     setRxDetails(response);
-    setLoading(false);
   };
   const getRxLikes = async () => {
     const response = await findLikesOfRx(rxId);
     setRxLikes(response);
-  }
-
+  };
   useEffect(() => {
-    getRxDetails();
+    const fetchData = async () => {
+      setLoading(true);
+      await getRxDetails();
+      await getRxLikes();
+      setLoading(false);
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -43,10 +48,10 @@ const ResultDetailsScreen = () => {
             <div className="d-flex justify-content-between align-items-center">
               <RxBasicInfo rxDetails={rxDetails} />
               <span className="badge bg-light">
-                <i></i>
+                <i className="bi bi-heart"></i> {rxLikes.length}
               </span>
             </div>
-            
+
             <div className="mt-3 d-flex">
               <ImageCarousel rxPhotos={rxDetails.photos} />
               <ul className="list-group wd-additional-info-text">
