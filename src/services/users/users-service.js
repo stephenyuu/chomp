@@ -22,9 +22,14 @@ export const logout = async () => {
 };
 
 export const findUserByUsername = async (username) => {
-  const response = await api.get(`${USERS_REST_API_URL}/${username}`);
+  const response = await api.get(`${USERS_REST_API_URL}/username/${username}`);
   return response.data;
 };
+
+export const findUserByUserId = async (userId) => {
+  const response = await api.get(`${USERS_REST_API_URL}/id/${userId}`);
+  return response.data;
+}
 
 export const register = async (user) => {
   const response = await api.post(`${USERS_REST_API_URL}/register`, user);

@@ -38,14 +38,6 @@ const FavoritesList = ({ user }) => {
             <div className="container d-flex justify-content-center">
               <div class="card bg-light mb-3 w-50">
                 <div class="card-header">No favorites found</div>
-                <div class="card-body">
-                  <button
-                    class=" btn btn-primary"
-                    onClick={() => navigate("/search-rxs")}
-                  >
-                    Search for restaurants to favorite!
-                  </button>
-                </div>
               </div>
             </div>
           ) : (

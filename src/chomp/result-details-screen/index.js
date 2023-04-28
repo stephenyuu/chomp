@@ -5,10 +5,12 @@ import {
   findLikesOfRx,
   isRxLikedByUser,
   undoLikeRx,
-  likeRx
+  likeRx,
 } from "../../services/likes/likes-service";
+import { findUserByUserId } from "../../services/users/users-service";
 import { useSelector } from "react-redux";
 import { Modal } from "react-bootstrap";
+import { useNavigate } from "react-router";
 import Chomp from "..";
 import SearchRxs from "../search-rxs";
 import ImageCarousel from "./image-carousel";
@@ -19,12 +21,14 @@ import RxYelpReviewsAccordion from "../reusable-components/rx-yelp-reviews-accor
 import "./index.css";
 
 const ResultDetailsScreen = () => {
+  const navigate = useNavigate();
   const { rxId } = useParams();
   const { currentUser } = useSelector((state) => state.users);
   const [loading, setLoading] = useState(true);
   const [rxDetails, setRxDetails] = useState({});
   const [rxLikes, setRxLikes] = useState([]);
   const [liked, setLiked] = useState(false);
+  const [rxLikesUsernames, setRxLikesUsernames] = useState([]);
   const [showLikesModal, setShowLikesModal] = useState(false);
   const getRxDetails = async () => {
     const response = await findRxDetails(rxId);
@@ -45,13 +49,19 @@ const ResultDetailsScreen = () => {
   const handleLikeClick = async () => {
     if (liked) {
       await undoLikeRx(rxId, currentUser._id);
-      setRxLikes((likes) => likes.filter((like) => like.userMongooseKey !== currentUser._id));
+      setRxLikes((likes) =>
+        likes.filter((like) => like.userMongooseKey !== currentUser._id)
+      );
       setLiked(false);
     } else {
       const response = await likeRx({ name: rxDetails.name, rxId: rxId });
       setRxLikes((likes) => [...likes, response]);
-      setLiked(true)
+      setLiked(true);
     }
+  };
+
+  const handleUsernameClick = (username) => {
+    navigate(`/user-search/${username}`);
   };
 
   useEffect(() => {
@@ -64,7 +74,20 @@ const ResultDetailsScreen = () => {
     };
 
     fetchData();
-  }, []);
+  }, [currentUser]);
+
+  useEffect(() => {
+    const fetchUsernamesOfLikes = async () => {
+      const usernames = [];
+      rxLikes.map(async (like) => {
+        const user = await findUserByUserId(like.userMongooseKey);
+        usernames.push(user.username);
+      });
+      setRxLikesUsernames(usernames);
+    };
+
+    fetchUsernamesOfLikes();
+  }, [rxLikes]);
 
   return (
     <Chomp activeLink="searchRxs">
@@ -87,7 +110,7 @@ const ResultDetailsScreen = () => {
                   onClick={() => {
                     setShowLikesModal(true);
                   }}
-                  className="wd-likes-count"
+                  className="wd-nav-text"
                 >
                   {rxLikes.length}
                 </span>
@@ -99,7 +122,18 @@ const ResultDetailsScreen = () => {
                     <Modal.Title>Likes</Modal.Title>
                   </Modal.Header>
                   <Modal.Body>
-                    {<ul className="list-group-item"></ul>}
+                    {
+                      <ul className="list-group">
+                        {rxLikesUsernames.map((username) => (
+                          <li
+                            className="list-group-item wd-nav-text"
+                            onClick={() => handleUsernameClick(username)}
+                          >
+                            {username}
+                          </li>
+                        ))}
+                      </ul>
+                    }
                   </Modal.Body>
                 </Modal>
               </div>
