@@ -155,7 +155,7 @@ const LoginScreen = () => {
                   </div>
                   <div className="form-group">
                     <label htmlFor="modalInputPassword" className="form-label mt-4">
-                      Username
+                      Password
                     </label>
                     <input
                       className="form-control"

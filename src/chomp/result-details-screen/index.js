@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { findRxDetails } from "../../services/rxs/rxs-service";
-import { findLikesOfRx } from "../../services/likes/likes-service";
+import {
+  findLikesOfRx,
+  isRxLikedByUser,
+  undoLikeRx,
+  likeRx
+} from "../../services/likes/likes-service";
 import { useSelector } from "react-redux";
 import Chomp from "..";
 import SearchRxs from "../search-rxs";
@@ -27,16 +32,35 @@ const ResultDetailsScreen = () => {
     const response = await findLikesOfRx(rxId);
     setRxLikes(response);
   };
+  const getIfLiked = async () => {
+    if (currentUser) {
+      isRxLikedByUser(rxId, currentUser._id).then((result) => {
+        setLiked(result);
+      });
+    }
+  };
+
+  const handleLikeClick = () => {
+    if (liked) {
+      undoLikeRx(rxId, currentUser._id);
+      setLiked(false)
+    } else {
+      likeRx({ name: rxDetails.name, rxId: rxId });
+      setLiked(true)
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       await getRxDetails();
       await getRxLikes();
+      await getIfLiked();
       setLoading(false);
     };
 
     fetchData();
-  }, []);
+  }, [liked]);
 
   return (
     <Chomp activeLink="searchRxs">
@@ -47,8 +71,13 @@ const ResultDetailsScreen = () => {
           <div className="d-flex flex-column">
             <div className="d-flex justify-content-between align-items-center">
               <RxBasicInfo rxDetails={rxDetails} />
-              <span className="badge bg-light">
-                <i className="bi bi-heart"></i> {rxLikes.length}
+              <span className="badge bg-light" onClick={handleLikeClick}>
+                {liked ? (
+                  <i className="bi bi-heart-fill"></i>
+                ) : (
+                  <i className="bi bi-heart "></i>
+                )}{" "}
+                <span>{rxLikes.length}</span>
               </span>
             </div>
 
