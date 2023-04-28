@@ -6,8 +6,18 @@ const api = axios.create({
   withCredentials: true,
 });
 
-export const deleteReview = async (rxId, userId) => {
-  const response = await api.delete(`${REVIEWS_REST_API_URL}/${rxId}/delete/${userId}`);
+export const reviewRx = async (rxDetails, reviewText) => {
+    const response = await api.post(`${REVIEWS_REST_API_URL}/${rxDetails.id}/${rxDetails.name}`, { text: reviewText });
+    return response.data;
+  };
+
+export const updateUser = async (reviewId, reviewText) => {
+    const response = await api.put(`${REVIEWS_REST_API_URL}/${reviewId}`, { text: reviewText });
+    return response.data;
+};
+
+export const deleteReview = async (reviewId) => {
+  const response = await api.delete(`${REVIEWS_REST_API_URL}/delete/${reviewId}`);
   return response.data;
 };
 

@@ -19,7 +19,12 @@ import RxBasicInfo from "../reusable-components/rx-basic-info/";
 import RxHoursAccordion from "../reusable-components/rx-hours-accordion";
 import RxYelpReviewsAccordion from "../reusable-components/rx-yelp-reviews-accordion";
 import "./index.css";
-import { findReviewsOfRx } from "../../services/reviews/reviews-service";
+import {
+  deleteReview,
+  findReviewsOfRx,
+  reviewRx,
+  updateUser,
+} from "../../services/reviews/reviews-service";
 
 const ResultDetailsScreen = () => {
   const navigate = useNavigate();
@@ -34,6 +39,8 @@ const ResultDetailsScreen = () => {
   const [showLikesModal, setShowLikesModal] = useState(false);
   const [showReviewsModal, setShowReviewsModal] = useState(false);
   const [reviewText, setReviewText] = useState("");
+  const [editing, setEditing] = useState(false);
+
   const getRxDetails = async () => {
     const response = await findRxDetails(rxId);
     setRxDetails(response);
@@ -54,6 +61,18 @@ const ResultDetailsScreen = () => {
     }
   };
 
+  const onEditClick = async () => {
+    console.log("editing")
+    setEditing(true);
+  };
+
+  const onDeleteClick = async () => {};
+
+  const onSaveClick = async () => {
+    console.log("saving")
+    setEditing(false);
+  };
+
   const handleLikeClick = async () => {
     if (liked) {
       await undoLikeRx(rxId, currentUser._id);
@@ -72,8 +91,10 @@ const ResultDetailsScreen = () => {
     navigate(`/user-search/${username}`);
   };
 
-  const handleShareReviewClick = () => {
-
+  const handleShareReviewClick = async () => {
+    const response = await reviewRx(rxDetails, reviewText);
+    getRxReviews((reviews) => [...reviews, response]);
+    setReviewText("");
   };
 
   useEffect(() => {
@@ -155,7 +176,7 @@ const ResultDetailsScreen = () => {
                 </div>
                 <div className="badge bg-light">
                   <span>
-                    <i class="bi bi-chat"></i>{" "}
+                    <i className="bi bi-chat"></i>{" "}
                   </span>
                   <span
                     onClick={() => {
@@ -163,7 +184,7 @@ const ResultDetailsScreen = () => {
                     }}
                     className="wd-nav-text"
                   >
-                    {`${rxLikes.length} Nibbler Reviews`}
+                    {`${rxReviews.length} Nibbler Reviews`}
                   </span>
                   <Modal
                     show={showReviewsModal}
@@ -174,18 +195,24 @@ const ResultDetailsScreen = () => {
                     </Modal.Header>
                     <Modal.Body>
                       {currentUser.isReviewer && (
-                        <div class="form-group">
-                          <label for="reviewTextarea" class="form-label">
+                        <div className="form-group">
+                          <label
+                            htmlFor="reviewTextarea"
+                            className="form-label"
+                          >
                             Write a review
                           </label>
                           <textarea
-                            class="form-control"
+                            className="form-control"
                             id="reviewTextarea"
                             rows="5"
                             value={reviewText}
-                           
+                            onChange={(e) => setReviewText(e.target.value)}
                           ></textarea>
-                          <button className="btn btn-primary mt-2" onClick={handleShareReviewClick}>
+                          <button
+                            className="btn btn-primary mt-2"
+                            onClick={handleShareReviewClick}
+                          >
                             Share
                           </button>
                         </div>
@@ -195,6 +222,28 @@ const ResultDetailsScreen = () => {
                           <li className="list-group-item">
                             {review.review}
                             {" - "}
+                            {/* toggle edit and save when user is editing. they can only edit/delete if the user wrote the review */}
+                            {editing ? (
+                              <button
+                                className="btn btn-primary float-end"
+                                onClick={() => onSaveClick(review)}
+                              >
+                                Save
+                              </button>
+                            ) : (
+                              <button
+                                className="btn btn-primary float-end"
+                                onClick={() => onEditClick(review)}
+                              >
+                                Edit
+                              </button>
+                            )}
+                            <button
+                              className="btn btn-danger float-end"
+                              onClick={() => onDeleteClick(review)}
+                            >
+                              delete
+                            </button>
                           </li>
                         ))}
                       </ul>
