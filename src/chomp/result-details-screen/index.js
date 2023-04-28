@@ -217,7 +217,6 @@ const ResultDetailsScreen = () => {
                         {rxReviews.map((reviewItem) => (
                           <li className="list-group-item">
                             {reviewItem.review}
-                            {" - "}
                             {currentUser &&
                               reviewItem.userMongooseKey ===
                                 currentUser._id && (
