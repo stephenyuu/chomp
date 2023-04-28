@@ -8,6 +8,7 @@ import {
   likeRx
 } from "../../services/likes/likes-service";
 import { useSelector } from "react-redux";
+import { Modal } from "react-bootstrap";
 import Chomp from "..";
 import SearchRxs from "../search-rxs";
 import ImageCarousel from "./image-carousel";
@@ -24,6 +25,7 @@ const ResultDetailsScreen = () => {
   const [rxDetails, setRxDetails] = useState({});
   const [rxLikes, setRxLikes] = useState([]);
   const [liked, setLiked] = useState(false);
+  const [showLikesModal, setShowLikesModal] = useState(false);
   const getRxDetails = async () => {
     const response = await findRxDetails(rxId);
     setRxDetails(response);
@@ -40,12 +42,14 @@ const ResultDetailsScreen = () => {
     }
   };
 
-  const handleLikeClick = () => {
+  const handleLikeClick = async () => {
     if (liked) {
-      undoLikeRx(rxId, currentUser._id);
-      setLiked(false)
+      await undoLikeRx(rxId, currentUser._id);
+      setRxLikes((likes) => likes.filter((like) => like.userMongooseKey !== currentUser._id));
+      setLiked(false);
     } else {
-      likeRx({ name: rxDetails.name, rxId: rxId });
+      const response = await likeRx({ name: rxDetails.name, rxId: rxId });
+      setRxLikes((likes) => [...likes, response]);
       setLiked(true)
     }
   };
@@ -60,7 +64,7 @@ const ResultDetailsScreen = () => {
     };
 
     fetchData();
-  }, [liked]);
+  }, []);
 
   return (
     <Chomp activeLink="searchRxs">
@@ -71,16 +75,35 @@ const ResultDetailsScreen = () => {
           <div className="d-flex flex-column">
             <div className="d-flex justify-content-between align-items-center">
               <RxBasicInfo rxDetails={rxDetails} />
-              <span className="badge bg-light" onClick={handleLikeClick}>
-                {liked ? (
-                  <i className="bi bi-heart-fill"></i>
-                ) : (
-                  <i className="bi bi-heart "></i>
-                )}{" "}
-                <span>{rxLikes.length}</span>
-              </span>
+              <div className="badge bg-light">
+                <span onClick={handleLikeClick}>
+                  {liked ? (
+                    <i className="bi bi-heart-fill"></i>
+                  ) : (
+                    <i className="bi bi-heart "></i>
+                  )}
+                </span>{" "}
+                <span
+                  onClick={() => {
+                    setShowLikesModal(true);
+                  }}
+                  className="wd-likes-count"
+                >
+                  {rxLikes.length}
+                </span>
+                <Modal
+                  show={showLikesModal}
+                  onHide={() => setShowLikesModal(false)}
+                >
+                  <Modal.Header closeButton>
+                    <Modal.Title>Likes</Modal.Title>
+                  </Modal.Header>
+                  <Modal.Body>
+                    {<ul className="list-group-item"></ul>}
+                  </Modal.Body>
+                </Modal>
+              </div>
             </div>
-
             <div className="mt-3 d-flex">
               <ImageCarousel rxPhotos={rxDetails.photos} />
               <ul className="list-group wd-additional-info-text">
