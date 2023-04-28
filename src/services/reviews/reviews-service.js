@@ -7,7 +7,7 @@ const api = axios.create({
 });
 
 export const reviewRx = async (rxDetails, reviewText) => {
-    const response = await api.post(`${REVIEWS_REST_API_URL}/${rxDetails.id}/${rxDetails.name}`, { text: reviewText });
+    const response = await api.post(`${REVIEWS_REST_API_URL}/review-rx/${rxDetails.id}/${rxDetails.name}`, { text: reviewText });
     return response.data;
   };
 
@@ -30,3 +30,8 @@ export const findReviewedRxsOfUser = async (userId) => {
   const response = await axios.get(`${REVIEWS_REST_API_URL}/user/${userId}`);
   return response.data;
 };
+
+export const isReviewSharedByUser = async (reviewId, userId) => {
+  const response = await api.post(`${REVIEWS_REST_API_URL}/review/${reviewId}/by/${userId}`);
+  return response.data;
+}

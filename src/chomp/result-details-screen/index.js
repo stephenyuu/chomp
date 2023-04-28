@@ -24,6 +24,7 @@ import {
   findReviewsOfRx,
   reviewRx,
   updateUser,
+  isReviewSharedByUser,
 } from "../../services/reviews/reviews-service";
 
 const ResultDetailsScreen = () => {
@@ -32,13 +33,16 @@ const ResultDetailsScreen = () => {
   const { currentUser } = useSelector((state) => state.users);
   const [loading, setLoading] = useState(true);
   const [rxDetails, setRxDetails] = useState({});
+
   const [rxLikes, setRxLikes] = useState([]);
-  const [rxReviews, setRxReviews] = useState([]);
   const [liked, setLiked] = useState(false);
   const [rxLikesUsernames, setRxLikesUsernames] = useState([]);
+
+  const [rxReviews, setRxReviews] = useState([]);
+  const [reviewText, setReviewText] = useState("");
+
   const [showLikesModal, setShowLikesModal] = useState(false);
   const [showReviewsModal, setShowReviewsModal] = useState(false);
-  const [reviewText, setReviewText] = useState("");
   const [editing, setEditing] = useState(false);
 
   const getRxDetails = async () => {
@@ -62,16 +66,14 @@ const ResultDetailsScreen = () => {
   };
 
   const onEditClick = async (review) => {
-    console.log("editing")
+    console.log("editing");
     setEditing(true);
   };
 
-  const onDeleteClick = async (review) => {
-
-  };
+  const onDeleteClick = async (review) => {};
 
   const onSaveClick = async () => {
-    console.log("saving")
+    console.log("saving");
     setEditing(false);
   };
 
@@ -196,7 +198,7 @@ const ResultDetailsScreen = () => {
                       <Modal.Title>Nibbler Reviews</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                      {currentUser.isReviewer && (
+                      {currentUser && currentUser.isReviewer && (
                         <div className="form-group">
                           <label
                             htmlFor="reviewTextarea"
@@ -224,27 +226,31 @@ const ResultDetailsScreen = () => {
                           <li className="list-group-item">
                             {review.review}
                             {" - "}
-                            {/* toggle edit and save when user is editing. they can only edit/delete if the user wrote the review */}
-                            <button
-                              className="btn btn-danger float-end"
-                              onClick={() => onDeleteClick(review)}
-                            >
-                              delete
-                            </button>
-                            {editing ? (
-                              <button
-                                className="btn btn-primary float-end"
-                                onClick={() => onSaveClick(review)}
-                              >
-                                Save
-                              </button>
-                            ) : (
-                              <button
-                                className="btn btn-primary float-end"
-                                onClick={() => onEditClick(review)}
-                              >
-                                Edit
-                              </button>
+                            {review.userMongooseKey === currentUser._id && (
+                              <>
+                                <button
+                                  className="btn btn-danger float-end"
+                                  onClick={() => onDeleteClick(review)}
+                                >
+                                  delete
+                                </button>
+
+                                {editing ? (
+                                  <button
+                                    className="btn btn-primary float-end"
+                                    onClick={() => onSaveClick(review)}
+                                  >
+                                    Save
+                                  </button>
+                                ) : (
+                                  <button
+                                    className="btn btn-primary float-end"
+                                    onClick={() => onEditClick(review)}
+                                  >
+                                    Edit
+                                  </button>
+                                )}
+                              </>
                             )}
                           </li>
                         ))}

@@ -12,7 +12,7 @@ export const likeRx = async (rx) => {
 };
 
 export const isRxLikedByUser = async (rxId, userId) => {
-  const response = await api.post(`${LIKES_REST_API_URL}/${rxId}/${userId}`);
+  const response = await api.post(`${LIKES_REST_API_URL}/liked-rx/${rxId}/by/${userId}`);
   return response.data;
 };
 
