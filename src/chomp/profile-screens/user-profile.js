@@ -30,19 +30,25 @@ const UserProfile = () => {
 
   return (
     <Chomp className="align-items-center" activeLink="userSearch">
-      <form className="d-flex mt-3">
-        <input
-          className="form-control me-sm-2"
-          type="search"
-          placeholder="search users"
-          onChange={(e) => setSearch({ search: e.target.value })}
-        />
-        <Link
-          className="btn btn-secondary my-2 my-sm-0"
-          onClick={searchUsersClick}
-        >
-          Search
-        </Link>
+      <form className="d-flex flex-column mt-3">
+        <label htmlFor="search-username-input" className="form-label fw-bold">
+          Search by username
+        </label>
+        <div className="d-flex justify-content-between">
+          <input
+            id="search-username-input"
+            className="form-control me-sm-2"
+            type="search"
+            placeholder="Enter username"
+            onChange={(e) => setSearch({ search: e.target.value })}
+          />
+          <Link
+            className="btn btn-primary my-2 my-sm-0"
+            onClick={searchUsersClick}
+          >
+            Search
+          </Link>
+        </div>
       </form>
       {user && (
         <div className="container my-5">
@@ -76,14 +82,13 @@ const UserProfile = () => {
           </div>
         </div>
       )}
-      { !user && username && (
+      {!user && username && (
         <div className="container d-flex justify-content-center mt-3">
-        <div className="card bg-light mb-3 w-50">
-          <div className="card-body">
-            No users found. Please try again!
+          <div className="card bg-light mb-3 w-50">
+            <div className="card-body">No users found. Please try again!</div>
           </div>
         </div>
-      </div>)}
+      )}
     </Chomp>
   );
 };
