@@ -61,12 +61,14 @@ const ResultDetailsScreen = () => {
     }
   };
 
-  const onEditClick = async () => {
+  const onEditClick = async (review) => {
     console.log("editing")
     setEditing(true);
   };
 
-  const onDeleteClick = async () => {};
+  const onDeleteClick = async (review) => {
+
+  };
 
   const onSaveClick = async () => {
     console.log("saving")
@@ -223,6 +225,12 @@ const ResultDetailsScreen = () => {
                             {review.review}
                             {" - "}
                             {/* toggle edit and save when user is editing. they can only edit/delete if the user wrote the review */}
+                            <button
+                              className="btn btn-danger float-end"
+                              onClick={() => onDeleteClick(review)}
+                            >
+                              delete
+                            </button>
                             {editing ? (
                               <button
                                 className="btn btn-primary float-end"
@@ -238,12 +246,6 @@ const ResultDetailsScreen = () => {
                                 Edit
                               </button>
                             )}
-                            <button
-                              className="btn btn-danger float-end"
-                              onClick={() => onDeleteClick(review)}
-                            >
-                              delete
-                            </button>
                           </li>
                         ))}
                       </ul>
