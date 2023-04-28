@@ -6,7 +6,6 @@ const api = axios.create({
   withCredentials: true,
 });
 
-
 export const deleteReview = async (rxId, userId) => {
   const response = await api.delete(`${REVIEWS_REST_API_URL}/${rxId}/delete/${userId}`);
   return response.data;

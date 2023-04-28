@@ -47,7 +47,6 @@ const ResultDetailsScreen = () => {
   };
 
   const handleLikeClick = async () => {
-    if (currentUser) {
       if (liked) {
         await undoLikeRx(rxId, currentUser._id);
         setRxLikes((likes) =>
@@ -59,7 +58,6 @@ const ResultDetailsScreen = () => {
         setRxLikes((likes) => [...likes, response]);
         setLiked(true);
       }
-    }
   };
 
   const handleUsernameClick = (username) => {
