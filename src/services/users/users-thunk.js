@@ -11,9 +11,9 @@ export const logoutThunk = createAsyncThunk(
   async (user, thunkAPI) => await userService.logout()
 );
 
-export const deleteUserThunk = createAsyncThunk(
-  "users/delete",
-  async (user, thunkAPI) => await userService.deleteUser(user._id)
+export const findUserByUsernameThunk = createAsyncThunk(
+  "users/findUserByUsername",
+  async (username) => await userService.findUserByUsername(username)
 );
 
 export const registerThunk = createAsyncThunk(
@@ -36,7 +36,7 @@ export const updateUserThunk = createAsyncThunk(
     }
 );
 
-export const findUserByUsernameThunk = createAsyncThunk(
-  "users/findUserByUsername",
-  async (username) => await userService.findUserByUsername(username)
+export const deleteUserThunk = createAsyncThunk(
+  "users/delete",
+  async (user, thunkAPI) => await userService.deleteUser(user._id)
 );
