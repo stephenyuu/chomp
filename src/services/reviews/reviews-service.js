@@ -30,8 +30,3 @@ export const findReviewedRxsOfUser = async (userId) => {
   const response = await axios.get(`${REVIEWS_REST_API_URL}/user/${userId}`);
   return response.data;
 };
-
-export const isReviewSharedByUser = async (reviewId, userId) => {
-  const response = await api.post(`${REVIEWS_REST_API_URL}/review/${reviewId}/by/${userId}`);
-  return response.data;
-}

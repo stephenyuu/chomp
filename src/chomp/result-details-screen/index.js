@@ -23,8 +23,7 @@ import {
   deleteReview,
   findReviewsOfRx,
   reviewRx,
-  updateUser,
-  isReviewSharedByUser,
+  updateUser
 } from "../../services/reviews/reviews-service";
 
 const ResultDetailsScreen = () => {
