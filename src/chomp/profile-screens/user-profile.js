@@ -53,7 +53,7 @@ const UserProfile = () => {
                   <h3 className="mb-0">
                     {`${user.firstName} ${user.lastName}`}
                     {user.isReviewer ? (
-                      <h5 className="mt-1 text-muted">Chomper & Reviewer</h5>
+                      <h5 className="mt-1 text-muted">Nibbler</h5>
                     ) : (
                       <h5 className="mt-1 text-muted">Chomper</h5>
                     )}
