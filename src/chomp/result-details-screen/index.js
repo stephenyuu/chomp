@@ -47,16 +47,18 @@ const ResultDetailsScreen = () => {
   };
 
   const handleLikeClick = async () => {
-    if (liked) {
-      await undoLikeRx(rxId, currentUser._id);
-      setRxLikes((likes) =>
-        likes.filter((like) => like.userMongooseKey !== currentUser._id)
-      );
-      setLiked(false);
-    } else {
-      const response = await likeRx({ name: rxDetails.name, rxId: rxId });
-      setRxLikes((likes) => [...likes, response]);
-      setLiked(true);
+    if (currentUser) {
+      if (liked) {
+        await undoLikeRx(rxId, currentUser._id);
+        setRxLikes((likes) =>
+          likes.filter((like) => like.userMongooseKey !== currentUser._id)
+        );
+        setLiked(false);
+      } else {
+        const response = await likeRx({ name: rxDetails.name, rxId: rxId });
+        setRxLikes((likes) => [...likes, response]);
+        setLiked(true);
+      }
     }
   };
 
@@ -99,20 +101,22 @@ const ResultDetailsScreen = () => {
             <div className="d-flex justify-content-between align-items-center">
               <RxBasicInfo rxDetails={rxDetails} />
               <div className="badge bg-light">
-                <span onClick={handleLikeClick}>
-                  {liked ? (
-                    <i className="bi bi-heart-fill"></i>
-                  ) : (
-                    <i className="bi bi-heart "></i>
-                  )}
-                </span>{" "}
+                {currentUser && (
+                  <span onClick={handleLikeClick}>
+                    {liked ? (
+                      <i className="bi bi-heart-fill"></i>
+                    ) : (
+                      <i className="bi bi-heart "></i>
+                    )}{" "}
+                  </span>
+                )}
                 <span
                   onClick={() => {
                     setShowLikesModal(true);
                   }}
                   className="wd-nav-text"
                 >
-                  {rxLikes.length}
+                  {`${rxLikes.length} likes`}
                 </span>
                 <Modal
                   show={showLikesModal}
